@@ -127,7 +127,7 @@ export async function setupProject(): Promise<void> {
             value: "uc",
           },
           // TODO: We also need to add extension based theming like the version
-          // used in Pulse Browser
+          // used in Praxive Browser
         ],
       },
     ]);

@@ -18,7 +18,7 @@ import {
 /**
  * These are all of the different platforms that aus should deploy to. Note that
  * the names have been simplified and they are all only the ones that are
- * supported by Pulse Browser. If you need something else, open an issue on gh.
+ * supported by Praxive. If you need something else, open an issue on gh.
  *
  * Based off the code from mozrelease:
  * https://searchfox.org/mozilla-central/source/python/mozrelease/mozrelease/platforms.py

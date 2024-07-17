@@ -10,7 +10,7 @@ weight = 20
 
 Mozilla provides an automatic update service that can be used by anyone building a Firefox fork or any other application that depends on Mozilla toolkit.
 
-Attached to your "brand", you will need to include information regarding that brand's release. For example, Pulse has the following information attached to its alpha brand.
+Attached to your "brand", you will need to include information regarding that brand's release. For example, Praxive has the following information attached to its alpha brand.
 
 ```json
 {
@@ -49,4 +49,4 @@ An `output.mar` will be included in the root, which you should rename to the app
 
 Update manifests are stored in the `dist/update` directory. The contents of this directory should be uploaded to a webserver (e.g. GitHub Pages or S3) such that their root is at `/updates/browser/`.
 
-You will then need to set the `updateHostname` in `samurai.json` to the url of your update server. For Pulse, this is `updates.pulsebrowser.app`. You may also need to change the update server specified [here](https://searchfox.org/mozilla-central/rev/560b7b1b174ed36912b969eee0c1920f3c59bc56/build/moz.build#94).
+You will then need to set the `updateHostname` in `samurai.json` to the url of your update server. For Praxive, this is `updates.praxive.io`. You may also need to change the update server specified [here](https://searchfox.org/mozilla-central/rev/560b7b1b174ed36912b969eee0c1920f3c59bc56/build/moz.build#94).
