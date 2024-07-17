@@ -134,6 +134,33 @@ class Log {
       'The samurai issue tracker is located at: https://github.com/PraxiveSoftware/samurai/issues'
     )
   }
+
+  /**
+   * Outputs a success message to the console for the check command
+   *
+   * @param args The information you want to provide to the user
+   */
+  checkSuccess(...arguments_: unknown[]): void {
+    console.log(`${chalk.greenBright.bold('SUCCESS')}`, arguments_.join(' '))
+  }
+
+  /**
+   * Outputs a error message to the console for the check command
+   *
+   * @param args The information you want to provide to the user
+   */
+  checkError(...arguments_: unknown[]): void {
+    console.log(`${chalk.redBright.bold('ERROR')}`, arguments_.join(' '))
+  }
+
+  /**
+   * Outputs a warning message to the console for the check command
+   *
+   * @param args The information you want to provide to the user
+   */
+  checkWarning(...arguments_: unknown[]): void {
+    console.log(`${chalk.yellowBright.bold('WARNING')}`, arguments_.join(' '))
+  }
 }
 
 export const log = new Log()

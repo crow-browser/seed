@@ -1,6 +1,7 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
+import execa from 'execa'
 import { promises as fs } from 'node:fs'
 import { writeFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs'
 import { copyFile } from 'node:fs/promises'
@@ -225,7 +226,7 @@ export function shouldSkipOptionalCopy(file: string, files: string[]): boolean {
 
 /**
  * Copy all non-optional files from the template directory
-**/
+ **/
 async function copyRequired() {
   const directoryContents = await walkDirectory(templateDirectory)
 

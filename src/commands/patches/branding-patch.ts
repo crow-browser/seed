@@ -138,15 +138,18 @@ async function setupImages(configPath: string, outputPath: string) {
   await addHash(join(configPath, 'logo.png'))
 
   log.debug('Generating macos install')
-  const svgContent = await fs.readFile(join(configPath, 'MacOSInstaller.svg'), 'utf8');
+  const svgContent = await fs.readFile(
+    join(configPath, 'MacOSInstaller.svg'),
+    'utf8'
+  )
 
   await svg2img(svgContent, async (error: Error, buffer: Buffer) => {
     if (error) {
-      console.error('Error while SVG-PNG convertation:', error);
-      return;
+      console.error('Error while SVG-PNG convertation:', error)
+      return
     }
     await writeFile(join(outputPath, 'content', 'background.png'), buffer)
-  });
+  })
 
   await addHash(join(configPath, 'MacOSInstaller.svg'))
 }

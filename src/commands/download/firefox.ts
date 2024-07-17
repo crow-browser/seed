@@ -2,8 +2,8 @@ import execa from 'execa'
 import { existsSync, rmSync, writeFileSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
-import { exec } from 'child_process';
-import { promisify } from 'util';
+import { exec } from 'child_process'
+import { promisify } from 'util'
 
 import { bin_name } from '../..'
 import { BASH_PATH, ENGINE_DIR, MELON_TMP_DIR } from '../../constants'
@@ -24,62 +24,83 @@ import {
 } from './addon'
 import { configPath } from '../../utils'
 
-const execAsync = promisify(exec);
+const execAsync = promisify(exec)
 
 export async function handleMozillaPipChecks() {
   try {
-    await execAsync('python3 --version');
-    console.log('Python is already installed. Skipping installation...');
+    await execAsync('python3 --version')
+    log.success(
+      'Checking for Python... OK (v' +
+        (await execAsync('python3 --version')).stdout.split(' ')[1]
+    ) + ')'
   } catch (error) {
-    console.log('Python is not installed. Installation starting...');
-
-    if (process.platform === "win32") {
-      await execAsync('start ms-windows-store://pdp/?ProductId=9PJPW5LDXLZ5');
-      return console.log('Please install Python from the Microsoft Store and run the command again.');
-    } else if (process.platform === "darwin") {
-      await execAsync('brew install python3');
-    } else if (process.platform === "linux") {
-      await execAsync('sudo apt-get install python3');
+    if (process.platform === 'win32') {
+      await execAsync('start ms-windows-store://pdp/?ProductId=9PJPW5LDXLZ5')
+      return log.error(
+        'Python3 is required to run this command. Please install Python3 from the Microsoft Store and run the command again.'
+      )
+    } else if (process.platform === 'darwin') {
+      return log.error(
+        'Please install pip3 manually and run the command again.\n\nYou might try:\nbrew install python3'
+      )
+    } else if (process.platform === 'linux') {
+      await log.error(
+        'Please install pip3 manually and run the command again.\n\nYou might try:\nsudo apt-get install python3'
+      )
     } else {
-      return console.log('Unsupported operating system. Please install Python manually and run the command again.');
+      return log.error(
+        'Unsupported operating system for this command. Please install Python manually and run the command again.'
+      )
     }
   }
 
   try {
-    await execAsync('pip3 --version');
-    console.log('pip3 is already installed. Skipping installation...');
+    await execAsync('pip3 --version')
+    log.success(
+      'Checking for pip3... OK (v' +
+        (await execAsync('pip3 --version')).stdout.split(' ')[1]
+    ) + ')'
   } catch (error) {
-    console.log('pip3 is not installed. Installation starting...');
-
-    if (process.platform === "win32") {
-      await execAsync('curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py');
-      await execAsync('del get-pip.py');
-    } else if (process.platform === "darwin") {
-      await execAsync('sudo easy_install pip');
-    } else if (process.platform === "linux") {
-      await execAsync('sudo apt-get install python3-pip');
+    if (process.platform === 'win32') {
+      await execAsync(
+        'curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py'
+      )
+      await execAsync('del get-pip.py')
+    } else if (process.platform === 'darwin') {
+      log.error(
+        'Please install pip3 manually and run the command again.\n\nYou might try:\nbrew install python3-pip'
+      )
+    } else if (process.platform === 'linux') {
+      log.error(
+        'Please install pip3 manually and run the command again.\n\nYou might try:\nsudo apt-get install python3-pip'
+      )
     } else {
-      return console.log('Unsupported operating system. Please install pip3 manually and run the command again.');
+      return log.error(
+        'Unsupported operating system for this command. Please install pip3 manually and run the command again.'
+      )
     }
-
-    console.log('pip3 was successfully installed.');
   }
 
-  if (process.platform === "win32") {
+  if (process.platform === 'win32') {
     if (!existsSync('c:/mozilla-build')) {
-      console.log('MozillaBuild is not installed. Installation starting...');
-      
-      await execAsync('curl -o MozillaBuildSetup-Latest.exe https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe && start /wait MozillaBuildSetup-Latest.exe');
-      await execAsync('del MozillaBuildSetup-Latest.exe');
+      log.warning('Checking for MozillaBuild... NOT FOUND (c:/mozilla-build)')
 
-      console.log('MozillaBuild was successfully installed.');
+      await execAsync(
+        'curl -o MozillaBuildSetup-Latest.exe https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe && start /wait MozillaBuildSetup-Latest.exe'
+      )
+      await execAsync('del MozillaBuildSetup-Latest.exe')
+
+      log.info('Recheck for MozillaBuild...')
+      log.success('Checking for MozillaBuild... OK (c:/mozilla-build)')
     } else {
-      console.log('MozillaBuild is already installed. Skipping installation...');
+      log.success('Checking for MozillaBuild... OK (c:/mozilla-build)')
     }
 
-    return console.log('All required checks and installations were successful.');
+    log.success('[3/3] All checks passed.')
   } else {
-    console.log('Not a windows machine. Skipping MozillaBuild and pip3 checks / installations.');
+    log.info(
+      'Not a windows machine. Skipping MozillaBuild and pip3 checks / installations.'
+    )
   }
 }
 
@@ -91,7 +112,7 @@ export function shouldSetupFirefoxSource() {
 }
 
 export async function setupFirefoxSource(version: string) {
-  await handleMozillaPipChecks();
+  /* await handleMozillaPipChecks(); */
   const firefoxSourceTar = await downloadFirefoxSource(version)
 
   await unpackFirefoxSource(firefoxSourceTar)

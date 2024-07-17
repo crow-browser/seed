@@ -34,7 +34,8 @@ export const commands: Cmd[] = [
   },
   {
     cmd: 'commit',
-    description: 'Commit the changes of the project root to the git repository.',
+    description:
+      'Commit the changes of the project root to the git repository.',
     requestController: async () => (await import('./commands/commit')).commit,
   },
   {
@@ -43,6 +44,11 @@ export const commands: Cmd[] = [
     description: 'Get and set the dynamic config from this project',
     requestController: async () => (await import('./commands/set')).set,
     disableMiddleware: true,
+  },
+  {
+    cmd: 'check',
+    description: 'Check for prerequisites',
+    requestController: async () => (await import('./commands/check')).check,
   },
   {
     cmd: 'ci',

@@ -23,7 +23,7 @@ export const configDispatch = (
     /**
      * Chose what shell you should be using for the operating system
      */
-    shell?: 'default' | 'unix'
+    shell?: 'default' | 'unix' | 'bash'
     env?: Record<string, string>
   }
 ): Promise<boolean> => {

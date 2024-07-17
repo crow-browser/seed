@@ -15,9 +15,12 @@ If you are having problems with following these instructions, or with samurai in
 
 ### System requirements
 
-- **OS**: Windows, Linux and MacOS
-- **Samurai dependencies**: NodeJS and npm
-- **Browser dependencies**: Will be handled by bootstrapping
+- **OS**: Linux, MacOS and Windows (Support for Windows is experimental)
+- **Disk space**: 100GB
+- **RAM**: 16GB (8GB minimum, not recommended)
+- **CPU**: 4 cores
+- **Dependencies**: NodeJS, Python3, pip3, git
+- **Optional dependencies**: MozillaBuild (Windows only) (download: [here](https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe))
 
 ### Getting started
 
@@ -31,7 +34,13 @@ yarn global add @praxive/samurai
 # Note: Linux and mac users may have to run the above command with sudo
 ```
 
-Now create a git repo and clone it to your local machine. Then run the following:
+Now we suggest you to check if you have all the dependencies installed. You can do this by running the following command:
+
+```sh
+samurai check
+```
+
+Next create a git repo and clone it to your local machine. Then run the following:
 
 ```sh
 samurai setup-project
@@ -48,12 +57,10 @@ This will ask you a variety of questions in relation to your project setup. Firs
     Firefox beta (Not recommended)
 ```
 
-You can change what version you are bound to at any time. Pulse Browser currently uses the stable releases, but if you want a lower workload, the newer Extended Support releases might be good for you.
-
 Then next is the version of the browser you want to use. By default samurai will populate this with the latest version available, which we recommend using. Simply click enter to accept.
 
 ```
-? Enter the version of this product › 128.0.0
+? Enter the version of this product › 128.0
 ```
 
 Next it will ask for the name of your browser. Avoid references to Firefox or other Mozilla brands, as this is likely to lead to trademark and copyright issues down the road.

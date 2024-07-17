@@ -9,24 +9,24 @@ import { log } from '../log'
 import path from 'path'
 
 export const commit = async () => {
-    log.info(`Committing ${config.name}...`)
-    
-    const projectRoot = path.resolve(ENGINE_DIR, '..')
+  log.info(`Committing ${config.name}...`)
 
-    await execa('git', ['add', '.'], {
-        cwd: projectRoot,
-        stdio: 'inherit',
-    })
+  const projectRoot = path.resolve(ENGINE_DIR, '..')
 
-    await execa('git', ['commit', '-m', 'chore: commit'], {
-        cwd: projectRoot,
-        stdio: 'inherit',
-    })
+  await execa('git', ['add', '.'], {
+    cwd: projectRoot,
+    stdio: 'inherit',
+  })
 
-    await execa('git', ['push'], {
-        cwd: projectRoot,
-        stdio: 'inherit',
-    })
+  await execa('git', ['commit', '-m', 'chore: commit'], {
+    cwd: projectRoot,
+    stdio: 'inherit',
+  })
 
-    log.info(`Committed ${config.name}`)
-};
+  await execa('git', ['push --set-upstream origin main'], {
+    cwd: projectRoot,
+    stdio: 'inherit',
+  })
+
+  log.success(`Committed ${config.name}`)
+}
