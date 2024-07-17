@@ -24,9 +24,9 @@ If you are having problems with following these instructions, or with samurai in
 The first thing you are going to need to do is to install Samurai. As it is a nodejs program it can be installed through npm or yarn.
 
 ```sh
-npm install -g @praxive/samurai@latest
+npm install -g @praxive/samurai
 # or
-yarn global add @praxive/samurai@latest
+yarn global add @praxive/samurai
 
 # Note: Linux and mac users may have to run the above command with sudo
 ```
