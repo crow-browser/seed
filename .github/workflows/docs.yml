@@ -15,17 +15,10 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
-      - name: 🔩 Setup PNPM
-        uses: pnpm/action-setup@v3
-        with:
-          version: next-9
-          standalone: true
-      - name: 🔩 Setup Node ${{ matrix.node }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-          cache: 'pnpm'
-      - name: 🚀 Install dependencies
-        run: pnpm install
+
       - name: Deploy docs
-        run: pnpm docs:build
+        uses: shalzz/zola-deploy-action@v0.19.1
+        env:
+          PAGES_BRANCH: gh-pages
+          BUILD_DIR: docs/
+          GITHUB_TOKEN: ${{ secrets.ROBOT_TOKEN }}
