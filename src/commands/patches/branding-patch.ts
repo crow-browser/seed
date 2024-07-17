@@ -1,7 +1,9 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import { renderAsync } from '@resvg/resvg-js'
+import { promises as fs } from 'node:fs'
+import svg2img from 'svg2img'
+
 import {
   readdirSync,
   lstatSync,
@@ -136,10 +138,15 @@ async function setupImages(configPath: string, outputPath: string) {
   await addHash(join(configPath, 'logo.png'))
 
   log.debug('Generating macos install')
-  const macosInstall = await renderAsync(
-    await readFile(join(configPath, 'MacOSInstaller.svg'))
-  )
-  await writeFile(join(outputPath, 'content', 'background.png'), macosInstall)
+  const svgContent = await fs.readFile(join(configPath, 'MacOSInstaller.svg'), 'utf8');
+
+  await svg2img(svgContent, async (error: Error, buffer: Buffer) => {
+    if (error) {
+      console.error('Error while SVG-PNG convertation:', error);
+      return;
+    }
+    await writeFile(join(outputPath, 'content', 'background.png'), buffer)
+  });
 
   await addHash(join(configPath, 'MacOSInstaller.svg'))
 }

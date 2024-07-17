@@ -1,6 +1,7 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
+import { promises as fs } from 'node:fs'
 import { writeFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs'
 import { copyFile } from 'node:fs/promises'
 import { join, dirname } from 'node:path'
@@ -224,20 +225,41 @@ export function shouldSkipOptionalCopy(file: string, files: string[]): boolean {
 
 /**
  * Copy all non-optional files from the template directory
- */
+**/
 async function copyRequired() {
-  const directoryContents = await walkDirectory(templateDirectory)
+  const directoryContents = await walkDirectory(templateDirectory);
+  const config = await readConfig(join(projectDirectory, 'samurai.json'));
 
   for (const file of directoryContents) {
-    if (file.includes('.optional')) continue
+    if (file.includes('.optional')) continue;
     const outLocation = join(
       projectDirectory,
       file.replace(templateDirectory, '')
-    )
+    );
 
     if (!existsSync(outLocation)) {
-      mkdirSync(dirname(outLocation), { recursive: true })
-      await copyFile(file, outLocation)
+      mkdirSync(dirname(outLocation), { recursive: true });
+      if (file.endsWith('readme.md')) {
+        const content = readFileSync(file, 'utf8');
+        const updatedContent = replacePlaceholders(content, config);
+        await fs.writeFile(outLocation, updatedContent, 'utf8');
+      } else {
+        await copyFile(file, outLocation);
+      }
     }
   }
+}
+
+async function readConfig(configPath: string) {
+  const configFile = await fs.readFile(configPath, 'utf8');
+  return JSON.parse(configFile);
+}
+
+function replacePlaceholders(content: string, config: any) {
+  return content
+    .replace(/%NAME%/g, config.name)
+    .replace(/%VERSION%/g, config.version.version)
+    .replace(/%VENDOR%/g, config.vendor)
+    .replace(/%APP_ID%/g, config.appId)
+    .replace(/%BINARY_NAME%/g, config.binaryName);
 }

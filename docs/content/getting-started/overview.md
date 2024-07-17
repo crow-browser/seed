@@ -24,9 +24,9 @@ If you are having problems with following these instructions, or with samurai in
 The first thing you are going to need to do is to install Samurai. As it is a nodejs program it can be installed through npm or yarn.
 
 ```sh
-npm install -g @praxive/samurai@next
+npm install -g @praxive/samurai@latest
 # or
-yarn global add @praxive/samurai@next
+yarn global add @praxive/samurai@latest
 
 # Note: Linux and mac users may have to run the above command with sudo
 ```
@@ -100,10 +100,22 @@ If you are running this for the first time, you will need to install the firefox
 samurai bootstrap
 ```
 
+If you encour any errors with not found pip or MozillaBuild (MozillaBuild: Windows Only) while running the bootstrap command, you can try running the following command:
+
+```sh
+samurai download-mb-pip
+```
+
 After the source code has been downloaded, the changes to firefox described in the source code must be applied.
 
 ```sh
 samurai import
+```
+
+After running the importation, we have to add files and create our first commit.
+
+```sh
+samurai commit
 ```
 
 Finally, you can start building the firefox source code. This takes around an hour and a half on my computer, but the binary output will be cached, making later builds faster

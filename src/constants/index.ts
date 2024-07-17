@@ -15,6 +15,7 @@ export const PATCH_ARGS = [
   '--ignore-space-change',
   '--ignore-whitespace',
   '--verbose',
+  '--allow-empty',
 ]
 
 export const ENGINE_DIR = resolve(process.cwd(), '.engine')

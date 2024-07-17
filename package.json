@@ -1,6 +1,6 @@
 {
   "name": "@praxive/samurai",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.5",
   "description": "Build Firefox-based browsers with ease",
   "main": "index.js",
   "reveal": true,
@@ -41,7 +41,6 @@
   },
   "homepage": "https://github.com/PraxiveSoftware/samurai#readme",
   "dependencies": {
-    "@resvg/resvg-js": "^1.4.0",
     "async-icns": "^1.0.2",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
@@ -59,6 +58,7 @@
     "rustic": "^1.2.1",
     "semver": "^7.3.7",
     "sharp": "^0.30.7",
+    "svg2img": "1.0.0-beta.2",
     "tiny-glob": "^0.2.9",
     "xmlbuilder2": "^3.0.2"
   },

@@ -30,20 +30,24 @@ const applyConfig = async (os: string) => {
   let changeset
 
   try {
-    // Retrieve changeset
-    const { stdout } = await execa('git', ['rev-parse', 'HEAD'])
-    changeset = stdout.trim()
+      const { stdout: commitCount } = await execa('git', ['rev-list', '--count', 'HEAD']);
+      if (parseInt(commitCount.trim(), 10) === 0) {
+          throw new Error('No commits found in the repository.');
+      }
+  
+      const { stdout } = await execa('git', ['rev-parse', 'HEAD']);
+      changeset = stdout.trim();
   } catch (error) {
-    log.warning(
-      'Samurai expects that you are building your browser with git as your version control'
-    )
-    log.warning(
-      'If you are using some other version control system, please migrate to git'
-    )
-    log.warning('Otherwise, you can setup git in this folder by running:')
-    log.warning('   |git init|')
-
-    throw error
+      log.warning(
+          'Samurai expects that you are building your browser with git as your version control'
+      );
+      log.warning(
+          'If you are using some other version control system, please migrate to git'
+      );
+      log.warning('Otherwise, you can setup git in this folder by running:');
+      log.warning('   git init');
+  
+      throw error;
   }
 
   const templateOptions = {

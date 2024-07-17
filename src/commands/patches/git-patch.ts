@@ -17,9 +17,6 @@ export async function apply(path: string): Promise<void> {
       cwd: ENGINE_DIR,
     })
   } catch {
-    // If the patch has already been applied, we want to revert it. Because
-    // there is no good way to check this we are just going to catch and
-    // discard the error
     undefined
   }
 

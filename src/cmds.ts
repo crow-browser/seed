@@ -33,6 +33,11 @@ export const commands: Cmd[] = [
     requestController: async () => (await import('./commands/build')).build,
   },
   {
+    cmd: 'commit',
+    description: 'Commit the changes of the project root to the git repository.',
+    requestController: async () => (await import('./commands/commit')).commit,
+  },
+  {
     cmd: 'config <key> [value]',
     aliases: ['set', 'get'],
     description: 'Get and set the dynamic config from this project',
@@ -74,6 +79,12 @@ export const commands: Cmd[] = [
     ],
     requestController: async () =>
       (await import('./commands/download')).download,
+  },
+  {
+    cmd: 'download-mb-pip',
+    description: 'Download the required MozillaBuild and Python packages.',
+    requestController: async () =>
+      (await import('./commands/download/firefox')).handleMozillaPipChecks,
   },
   {
     cmd: 'update',
