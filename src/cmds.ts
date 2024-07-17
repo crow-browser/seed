@@ -9,7 +9,7 @@ import { Cmd } from './types'
 export const commands: Cmd[] = [
   {
     cmd: 'bootstrap',
-    description: 'Bootstrap the gluon app.',
+    description: 'Bootstrap the samurai app.',
     requestController: async () =>
       (await import('./commands/bootstrap')).bootstrap,
   },
@@ -17,7 +17,7 @@ export const commands: Cmd[] = [
     cmd: 'build',
     aliases: ['b'],
     description:
-      'Build the gluon app. Specify the OS param for cross-platform builds.',
+      'Build the samurai app. Specify the OS param for cross-platform builds.',
     options: [
       {
         arg: '--u, --ui',
@@ -69,7 +69,7 @@ export const commands: Cmd[] = [
     options: [
       {
         arg: '--force',
-        description: 'Delete the engine directory if it already exists',
+        description: 'Delete the .engine directory if it already exists',
       }
     ],
     requestController: async () =>
@@ -85,7 +85,7 @@ export const commands: Cmd[] = [
   },
   {
     cmd: 'execute',
-    description: 'Execute a command inside the engine directory.',
+    description: 'Execute a command inside the .engine directory.',
     requestController: async () => (await import('./commands/execute')).execute,
   },
   {
@@ -147,7 +147,7 @@ export const commands: Cmd[] = [
   },
   {
     cmd: 'setup-project',
-    description: 'Sets up a gluon project for the first time',
+    description: 'Sets up a samurai project for the first time',
     requestController: async () =>
       (await import('./commands/setup-project')).setupProject,
   },

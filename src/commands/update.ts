@@ -15,7 +15,7 @@ export const update = async (): Promise<void> => {
     process.exit(1)
   }
 
-  // We are using force here to delete the engine directory if it already
+  // We are using force here to delete the .engine directory if it already
   // exists to make way for the new version.
   await downloadInternals({ version, force: true })
 

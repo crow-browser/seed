@@ -5,7 +5,7 @@ weight = 10
 
 # Including addons
 
-Gluon provides an automated system for including extensions in your project. The addons are downloaded and included during the `download` build step. Addons can be included in the project config (`gluon.json`).
+Samurai provides an automated system for including extensions in your project. The addons are downloaded and included during the `download` build step. Addons can be included in the project config (`samurai.json`).
 
 ```json
 {
@@ -40,7 +40,7 @@ Note that the `id` is the gecko application id specified in the `manifest.json`.
 
 By default, when adding an addon with a toolbar button, it will be placed next to the hamburger menu. However, you may want to place it somewhere else. To do this, you must change the customizable ui in a similar way to how you would when removing pocket.
 
-You are going to want to open `engine/browser/components/customizableui/CustomizableUI.jsm`. At the top, you want to import the `ExtensionCommon` module.
+You are going to want to open `.engine/browser/components/customizableui/CustomizableUI.jsm`. At the top, you want to import the `ExtensionCommon` module.
 
 ```js
 const { makeWidgetId } = ChromeUtils.import(
@@ -84,5 +84,5 @@ let navbarPlacements = [
 Finally, export the changes you have made:
 
 ```sh
-gluon export-file browser/components/customizableui/CustomizableUI.jsm
+samurai export-file browser/components/customizableui/CustomizableUI.jsm
 ```

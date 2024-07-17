@@ -1,11 +1,11 @@
 +++
-title = "`gluon.json` Reference"
+title = "`samurai.json` Reference"
 weight = 0
 +++
 
-# gluon.json Reference
+# samurai.json Reference
 
-This reference guide may get outdated. If you need to check something, you can read [the config interface type](https://github.com/pulse-browser/gluon/blob/main/src/utils/config.ts#L96).
+This reference guide may get outdated. If you need to check something, you can read [the config interface type](https://github.com/PraxiveSoftware/samurai/blob/main/src/utils/config.ts#L96).
 
 ## name
 
@@ -13,7 +13,7 @@ This is the name of the product that is to be built.
 
 ```json
 {
-  "name": "Pulse Browser"
+  "name": "Praxive Software"
 }
 ```
 
@@ -43,7 +43,7 @@ The name of the output binary.
 
 ```json
 {
-  "binaryName": "pulse-browser"
+  "binaryName": "praxive"
 }
 ```
 
@@ -53,13 +53,13 @@ The host of the update server for updating. This is configured as part of the bu
 
 ```json
 {
-  "updateHostname": "updates.pulsebrowser.app"
+  "updateHostname": "updates.praxivesoftware.app"
 }
 ```
 
 ## license
 
-Information about the license the browser will be under. This is used by the Gluon license checker to ensure files have the MPL header if specified.
+Information about the license the browser will be under. This is used by the Samurai license checker to ensure files have the MPL header if specified.
 
 Specification:
 
@@ -97,13 +97,13 @@ Example:
 Commands that maybe used:
 
 ```sh
-gluon license-check
-gluon lc # Alias
+samurai license-check
+samurai lc # Alias
 ```
 
 ## version
 
-Provides information to gluon about the product and version that Gluon is responsible for managing.
+Provides information to samurai about the product and version that Samurai is responsible for managing.
 
 Specification:
 
@@ -138,14 +138,14 @@ Example
 {
   "version": {
     "product": "firefox",
-    "version": "102.0.1"
+    "version": "128.0.0"
   }
 }
 ```
 
 ## buildOptions
 
-These are flags that change how parts of Gluon operate.
+These are flags that change how parts of Samurai operate.
 
 ### windowsUseSymbolicLinks
 
@@ -153,7 +153,7 @@ When set to `true`, symbolic links will be enabled on Windows. From internal tes
 
 ## addons
 
-An index for each addon. These will be downloaded and configured as part of the `download` step that gluon performs. You can download extensions from AMO, Github or any URL. Note that the furha-robot will only be able to provide update checking to AMO and Github Extensions.
+An index for each addon. These will be downloaded and configured as part of the `download` step that samurai performs. You can download extensions from AMO, Github or any URL. Note that the furha-robot will only be able to provide update checking to AMO and Github Extensions.
 
 Specification:
 
@@ -210,8 +210,8 @@ Example:
 Commands that use this:
 
 ```sh
-gluon download
-gluon updates-addons # Generates update manifests for addons
+samurai download
+samurai updates-addons # Generates update manifests for addons
 ```
 
 ## brands
@@ -255,13 +255,13 @@ Example:
   "brands": {
     "stable": {
       "backgroundColor": "#2B2A33",
-      "brandShorterName": "Pulse",
-      "brandShortName": "Pulse Browser",
-      "brandFullName": "Pulse Browser",
+      "brandShorterName": "Praxive",
+      "brandShortName": "Praxive Software",
+      "brandFullName": "Praxive Software",
       "release": {
         "displayVersion": "1.0.0",
         "github": {
-          "repo": "pulse-browser/browser"
+          "repo": "PraxiveSoftware/browser"
         },
         "x86": {
           "windowsMar": "windows.mar",
@@ -272,13 +272,13 @@ Example:
     },
     "beta": {
       "backgroundColor": "#2B2A33",
-      "brandShorterName": "Pulse",
-      "brandShortName": "Pulse Browser",
-      "brandFullName": "Pulse Browser Beta",
+      "brandShorterName": "Praxive",
+      "brandShortName": "Praxive Software",
+      "brandFullName": "Praxive Software Beta",
       "release": {
         "displayVersion": "1.0.0-b.0",
         "github": {
-          "repo": "pulse-browser/browser"
+          "repo": "PraxiveSoftware/browser"
         },
         "x86": {
           "windowsMar": "windows.mar",
@@ -289,13 +289,13 @@ Example:
     },
     "alpha": {
       "backgroundColor": "#2B2A33",
-      "brandShorterName": "Pulse",
-      "brandShortName": "Pulse Browser",
-      "brandFullName": "Pulse Browser Alpha",
+      "brandShorterName": "Praxive",
+      "brandShortName": "Praxive Software",
+      "brandFullName": "Praxive Software Alpha",
       "release": {
-        "displayVersion": "1.0.0-a.16",
+        "displayVersion": "1.0.0-a.1",
         "github": {
-          "repo": "pulse-browser/browser"
+          "repo": "PraxiveSoftware/browser"
         },
         "x86": {
           "windowsMar": "windows.mar",
@@ -311,8 +311,8 @@ Example:
 Commands:
 
 ```sh
-gluon build
-gluon package
-gluon updates-browser
-gluon set brand <brand_name>
+samurai build
+samurai package
+samurai updates-browser
+samurai set brand <brand_name>
 ```

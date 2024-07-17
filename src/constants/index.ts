@@ -6,7 +6,7 @@ import { existsSync, mkdirSync, readdirSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { log } from '../log'
 
-export const BIN_NAME = 'gluon'
+export const BIN_NAME = 'samurai'
 
 export const BUILD_TARGETS = ['linux', 'windows', 'macos']
 export const ARCHITECTURE = ['i686', 'x86_64']
@@ -17,7 +17,7 @@ export const PATCH_ARGS = [
   '--verbose',
 ]
 
-export const ENGINE_DIR = resolve(process.cwd(), 'engine')
+export const ENGINE_DIR = resolve(process.cwd(), '.engine')
 export const SRC_DIR = resolve(process.cwd(), 'src')
 // eslint-disable-next-line unicorn/prefer-module
 export const PATCHES_DIR = resolve(
@@ -28,7 +28,7 @@ export const PATCHES_DIR = resolve(
 )
 export const COMMON_DIR = resolve(process.cwd(), 'common')
 export const CONFIGS_DIR = resolve(process.cwd(), 'configs')
-export const MELON_DIR = resolve(process.cwd(), '.gluon')
+export const MELON_DIR = resolve(process.cwd(), '.samurai')
 export const MELON_TMP_DIR = resolve(MELON_DIR, 'engine')
 export const DIST_DIR = resolve(process.cwd(), 'dist')
 
@@ -42,7 +42,7 @@ let CONFIG_GUESS = ''
 
 // We can find the current obj-* dir simply by searching. This shouldn't be to
 // hard and is more reliable than autoconf is. This command should only be run
-// if the engine directory has already been created
+// if the .engine directory has already been created
 if (existsSync(ENGINE_DIR)) {
   const possibleFolders = readdirSync(ENGINE_DIR, {
     withFileTypes: true,

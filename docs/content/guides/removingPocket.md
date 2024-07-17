@@ -5,11 +5,11 @@ weight = 5
 
 # Removing pocket
 
-**Note:** This expects you have gluon setup.
+**Note:** This expects you have samurai setup.
 
 ## Disabling in firefox.js
 
-The goal of this guide is to disable pocket and remove its icon from the toolbar. The first changes we will need to make is to the firefox.js file located in `engine/browser/app/profile/firefox.js`. Scroll to the lines that include the following settings (around line 1980 in firefox 94):
+The goal of this guide is to disable pocket and remove its icon from the toolbar. The first changes we will need to make is to the firefox.js file located in `.engine/browser/app/profile/firefox.js`. Scroll to the lines that include the following settings (around line 1980 in firefox 94):
 
 ```js
 pref('extensions.pocket.api', 'api.getpocket.com')
@@ -42,12 +42,12 @@ user_pref(
 Now you simply need to export the changes made to `firefox.js`:
 
 ```sh
-gluon export-file browser/app/profile/firefox.js
+samurai export-file browser/app/profile/firefox.js
 ```
 
 ## Removing pocket icon from toolbar
 
-Whilst the steps above will have disabled pocket. The pocket icon will still be visible in the toolbar. Instead you must remove it from the CustomizableUI layout. Open `engine/browser/components/customizableui/CustomizableUI.jsm` and find the array that looks like this (around line 240):
+Whilst the steps above will have disabled pocket. The pocket icon will still be visible in the toolbar. Instead you must remove it from the CustomizableUI layout. Open `.engine/browser/components/customizableui/CustomizableUI.jsm` and find the array that looks like this (around line 240):
 
 ```js
 let navbarPlacements = [
@@ -70,5 +70,5 @@ let navbarPlacements = [
 Remove the `save-to-pocket-button` item from the array and export the changes:
 
 ```sh
-gluon export-file browser/components/customizableui/CustomizableUI.jsm
+samurai export-file browser/components/customizableui/CustomizableUI.jsm
 ```

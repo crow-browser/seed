@@ -1,17 +1,17 @@
 {
-  "name": "gluon-build",
-  "version": "1.0.0-rc.5",
-  "description": "🍉 Build Firefox-based browsers with ease",
+  "name": "@praxive/samurai",
+  "version": "1.0.0-beta.1",
+  "description": "Build Firefox-based browsers with ease",
   "main": "index.js",
   "reveal": true,
   "bin": {
-    "gluon": "./dist/index.js"
+    "samurai": "./dist/index.js"
   },
   "scripts": {
     "test": "jest",
     "test:dev": "jest --watch",
-    "build": "tsc && chmod +x ./dist/index.js && cp src/commands/license-check.txt dist/commands/license-check.txt",
-    "build:win": "tsc && copy /y .\\src\\commands\\license-check.txt .\\dist\\commands\\license-check.txt",
+    "build": "tsc && (attrib +x ./dist/index.js || icacls ./dist/index.js /grant Everyone:(OI)(CI)F)",
+    "build:win": "tsc && copy /y src\\commands\\license-check.txt dist\\commands\\license-check.txt",
     "format": "prettier . -w",
     "lint": "eslint .",
     "docs:install": "",
@@ -19,23 +19,28 @@
     "docs:dev": "zola --root docs/ serve",
     "self": "cd testing && node ../dist/index.js"
   },
+
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pulse-browser/gluon.git"
+    "url": "git+https://github.com/PraxiveSoftware/samurai.git"
   },
   "keywords": [
+    "samurai",
+    "gluon",
+    "melon",
     "firefox",
     "firefox-fork",
     "build-tool"
   ],
   "authors": [
+    "binary-blazer",
     "TrickyPR"
   ],
   "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/pulse-browser/gluon/issues"
+    "url": "https://github.com/PraxiveSoftware/samurai/issues"
   },
-  "homepage": "https://github.com/pulse-browser/gluon#readme",
+  "homepage": "https://github.com/PraxiveSoftware/samurai#readme",
   "dependencies": {
     "@resvg/resvg-js": "^1.4.0",
     "async-icns": "^1.0.2",

@@ -68,6 +68,7 @@
     "node_modules/**/*",
     "**/firefox-*/**/*",
     "gecko",
-    "**/engine/**/*"
+    "**/engine/**/*",
+    "**/.engine/**/*"
   ]
 }

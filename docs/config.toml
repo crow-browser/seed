@@ -1,7 +1,7 @@
-name = "Gluon"
+name = "Samurai"
 description = "Build Firefox-based browsers with ease"
 license = "MPL 2.0"
-homepage = "https://github.com/pulse-browser/gluon"
+homepage = "https://github.com/PraxiveSoftware/samurai"
 min_version = "1.14.0"
 
 # The URL the site will be built for
@@ -20,7 +20,7 @@ highlight_code = true
 
 [extra]
 logo = "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Package/3D/package_3d.png"
-release = "https://api.github.com/repos/pulse-browser/gluon/releases/latest"
+release = "https://api.github.com/repos/PraxiveSoftware/samurai/releases/latest"
 
 [author]
-name = "TrickyPR"
+name = "binary-blazer"

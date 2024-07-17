@@ -9,7 +9,7 @@ Lets take a look at the file structure of your project. It should look something
 
 ```filesystem
 ├─  .gitignore
-├─  gluon.json
+├─  samurai.json
 ├─  configs
 │   ├─  common
 │   │   └─  mozconfig
@@ -44,24 +44,24 @@ Lets take a look at the file structure of your project. It should look something
 │           └─  windows
 │               ├─  browser-css.patch
 │               └─  jar-mn.patch
-├─  .gluon
+├─  .samurai
 │   └─  ...
-└─  engine
+└─  .engine
     └─  ...
 ```
 
-Whilst this may seem large (especially if you look inside of the `engine`) directory, it is all fairly manageable.
+Whilst this may seem large (especially if you look inside of the `.engine`) directory, it is all fairly manageable.
 
-## gluon.json
+## samurai.json
 
-The primary configuration file for your project is the `gluon.json` file. This is where you will put information about your browser so Gluon can build it correctly. It should look something like this:
+The primary configuration file for your project is the `samurai.json` file. This is where you will put information about your browser so Samurai can build it correctly. It should look something like this:
 
 ```json
 {
-  "name": "Gluon Example Browser",
+  "name": "Samurai Example Browser",
   "vendor": "Fushra",
-  "appId": "dev.gluon.example",
-  "binaryName": "gluon-example-browser",
+  "appId": "dev.samurai.example",
+  "binaryName": "samurai-example-browser",
 
   "version": {
     "product": "firefox",
@@ -78,11 +78,11 @@ Up the top of the config file, we have general information about the browser you
 
 The `version` key is used to specify information about the product you are building. `product` is the Firefox branch you are building against. `version` is the version of Firefox you are building against, which will vary with the branch. Here `firefox` refers to the stable branch of Firefox.
 
-`buildOptions` provides a number of internal toggles for how Gluon builds your project.
+`buildOptions` provides a number of internal toggles for how Samurai builds your project.
 
 ## Configs
 
-The configs folder stores a combination of config files that are required by Firefox and assets required by Gluon. By default there are only [`mozconfig` files](https://firefox-source-docs.mozilla.org/build/buildsystem/mozconfigs.html), Gluon should generate most parts of this config for you. The only part that you will need to change is the source control repo:
+The configs folder stores a combination of config files that are required by Firefox and assets required by Samurai. By default there are only [`mozconfig` files](https://firefox-source-docs.mozilla.org/build/buildsystem/mozconfigs.html), Samurai should generate most parts of this config for you. The only part that you will need to change is the source control repo:
 
 ```bash
 ac_add_options --with-app-name=${binName}
@@ -101,7 +101,7 @@ export MOZ_DISTRIBUTION_ID=${appId}
 # Misc
 export MOZ_STUB_INSTALLER=1
 export MOZ_INCLUDE_SOURCE_INFO=1
-export MOZ_SOURCE_REPO=https://github.com/dothq/browser-desktop # <-- Change this!
+export MOZ_SOURCE_REPO=https://github.com/PraxiveSoftware/browser-desktop # <-- Change this!
 export MOZ_SOURCE_CHANGESET=${changeset}
 ```
 
@@ -109,9 +109,9 @@ This directory is also where you would put [branding assets for your browser](/g
 
 ## src/
 
-The source folder contains all of the modifications that you have made to Firefox. These come in two types, inserted files (and folders) and patches. Both of these are applied using the `gluon import` command.
+The source folder contains all of the modifications that you have made to Firefox. These come in two types, inserted files (and folders) and patches. Both of these are applied using the `samurai import` command.
 
-Inserted files are just files (and folders) that you have inserted into the Firefox source code. These will overwrite existing files if they already exist. On Linux and MacOS, these are symlinked so when you change a file in `src/`, the change will be mirrored in Firefox's source code instantly. On Windows, you will need to run `gluon import` for these changes to apply.
+Inserted files are just files (and folders) that you have inserted into the Firefox source code. These will overwrite existing files if they already exist. On Linux and MacOS, these are symlinked so when you change a file in `src/`, the change will be mirrored in Firefox's source code instantly. On Windows, you will need to run `samurai import` for these changes to apply.
 
 Patches are changes to Firefox's files. As a rule of thumb, you should prefer splitting new content into a new file rather than using patches, but there are times when you must modify Firefox's source code. Each of these patch files are just git patch files:
 
@@ -131,20 +131,20 @@ index 404a88b218c652afac0cb2004676d22da53d48f3..5a4668ef2970dd773536907f51f3e7e7
    skin/classic/browser/monitor-border.png
 ```
 
-In this patch, you can see that I am adding a `*` to the start of a line. You generate these patches by modifying the file in the `engine/` directory and running `gluon export` to export your changes to the src directory. Be careful, if you do not export your changes, they will not be saved and will not work on other developers' computers or yours after an update!
+In this patch, you can see that I am adding a `*` to the start of a line. You generate these patches by modifying the file in the `.engine/` directory and running `samurai export` to export your changes to the src directory. Be careful, if you do not export your changes, they will not be saved and will not work on other developers' computers or yours after an update!
 
 ```sh
-gluon export browser/themes/linux/jar.mn
+samurai export browser/themes/linux/jar.mn
 ```
 
-## engine/
+## .engine/
 
-The engine directory contains all of Firefox's source code. It is massive - around 15GB in size (around 11GB of that are build assets from when you run `gluon build`). I am not able to provide a full explanation of the contents of the directory.
+The .engine directory contains all of Firefox's source code. It is massive - around 15GB in size (around 11GB of that are build assets from when you run `samurai build`). I am not able to provide a full explanation of the contents of the directory.
 
-However, most of the changes you will want to make will be in `engine/browser/`, which contains the source code for the browser's UI. Here are some of the important directories inside of the `engine/browser/` directory:
+However, most of the changes you will want to make will be in `.engine/browser/`, which contains the source code for the browser's UI. Here are some of the important directories inside of the `.engine/browser/` directory:
 
-- [`engine/browser/base/content`](https://searchfox.org/mozilla-central/source/browser/base/content): These contain the xhtml files that make up a majority of the browser's ui
-- [`engine/browser/components`](https://searchfox.org/mozilla-central/source/browser/components): This contains some self-contained UI features, like screenshots, uitours, downloads, etc.
-- [`engine/browser/themes`](https://searchfox.org/mozilla-central/source/browser/themes): Here lies most of the browsers CSS. See [Customizing Your Browser's UI](/getting-started/userchrome) for more information.
+- [`.engine/browser/base/content`](https://searchfox.org/mozilla-central/source/browser/base/content): These contain the xhtml files that make up a majority of the browser's ui
+- [`.engine/browser/components`](https://searchfox.org/mozilla-central/source/browser/components): This contains some self-contained UI features, like screenshots, uitours, downloads, etc.
+- [`.engine/browser/themes`](https://searchfox.org/mozilla-central/source/browser/themes): Here lies most of the browsers CSS. See [Customizing Your Browser's UI](/getting-started/userchrome) for more information.
 
 One of the best ways to find what you are looking for and get to know the code base is by searching it. However, if you try and search through it on your computer you are in for a world of pain. Instead, I recommend you use [SearchFox](https://searchfox.org), which is significantly faster.

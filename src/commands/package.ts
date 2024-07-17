@@ -25,7 +25,7 @@ export const gluonPackage = async () => {
   const version = brandingDetails.release.displayVersion
   const channel = brandingKey || 'unofficial'
 
-  // The engine directory must have been downloaded for this to be valid
+  // The .engine directory must have been downloaded for this to be valid
   // TODO: Make this a reusable function that can be used by everything
   if (!existsSync(ENGINE_DIR)) {
     log.error(

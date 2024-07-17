@@ -126,10 +126,10 @@ export async function downloadInternals({ version, force }: { version: string, f
     rmSync(ENGINE_DIR, { recursive: true })
   }
 
-  // If the engine directory is empty, we should delete it.
+  // If the .engine directory is empty, we should delete it.
   const engineIsEmpty = existsSync(ENGINE_DIR) && await readdir(ENGINE_DIR).then((files) => files.length === 0)
   if (engineIsEmpty) {
-    log.info("'engine/' is empty, it...")
+    log.info("'.engine/' is empty, it...")
     rmSync(ENGINE_DIR, { recursive: true })
   }
 

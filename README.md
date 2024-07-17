@@ -4,11 +4,12 @@
   <img width="98" src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Package/3D/package_3d.png"/>
 </p>
 
-# Gluon
+# Samurai
 
 Build Firefox-based browsers with ease
 
-**This is still in a prerelease / prototype phase. Changes will be made, things will be broken**
+**This is still in a prerelease / prototype phase. Changes will be made, things will be broken**<br />
+**Fork of the [gluon](https://github.com/pulse-browser/gluon) project**
 
 </div>
 
@@ -17,17 +18,17 @@ Build Firefox-based browsers with ease
 Per project (recommended):
 
 ```sh
-npm install gluon-build
+npm install @praxive/samurai
 # or
-yarn add gluon-build
+yarn add @praxive/samurai
 ```
 
 Globally:
 
 ```sh
-npm install -g gluon-build
+npm install -g @praxive/samurai
 # or
-yarn global add gluon-build
+yarn global add @praxive/samurai
 
 # Note: Linux and mac users may have to run the above command with sudo
 ```
@@ -39,6 +40,10 @@ Documentation is available on [docs.gluon.dev](https://docs.gluon.dev) or in the
 ## Licencing notes
 
 The following is included in good faith. The writer is not a lawyer, and this is not legal advice.
+
+### Gluon
+
+Samurai is a fork of [Gluon](https://github.com/pulse-browser/gluon), which is licensed under MPL v2.0. The original license is included in the LICENSE file.
 
 ### Melon
 
