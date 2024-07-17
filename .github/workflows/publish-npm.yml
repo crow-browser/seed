@@ -30,8 +30,13 @@ jobs:
       cache: "pnpm"
    - name: 🚀 Install dependencies
      run: pnpm install
+   - name: 🔑 Setup NPM token
+     run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+     env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
    - name: 🏗️ Build Package
      run: pnpm build
-   - uses: JS-DevTools/npm-publish@v3
-     with:
-      token: ${{ secrets.NPM_TOKEN }}
+   - name: 🚀 Publish package
+     run: pnpm publish --access public --no-git-checks --provenance
+     env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

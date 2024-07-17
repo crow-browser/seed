@@ -34,5 +34,5 @@ jobs:
      run: pnpm build
    - uses: JS-DevTools/npm-publish@v3
      with:
-      token: ${{ secrets.ROBOT_TOKEN }}
+      token: ${{ secrets.GITHUB_TOKEN }}
       registry: "https://npm.pkg.github.com"
