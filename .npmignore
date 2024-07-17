@@ -10,7 +10,7 @@ tests/
 .prettierrc.json
 samurai.json
 tsconfig.json
-package-lock.json
+pnpm-lock.yaml
 .eslintignore
 .eslintrc.json
 .samurai
