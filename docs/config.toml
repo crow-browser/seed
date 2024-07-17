@@ -12,5 +12,5 @@ author = "TrickyPR"
 highlight_code = true
 
 [extra]
-logo = "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Package/3D/package_3d.png"
+logo = "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Artist%20palette/3D/artist_palette_3d.png"
 release = "https://api.github.com/repos/PraxiveSoftware/samurai/releases/latest"
