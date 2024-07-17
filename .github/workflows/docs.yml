@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'docs/**'
-      - '.github/**'
+      - "docs/**"
+      - ".github/**"
   workflow_dispatch:
 
 jobs:

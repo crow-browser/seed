@@ -2,7 +2,7 @@
 
 This is a firefox fork downloaded, compiled, built and ran by Samurai.
 
-if you want to style the browser, you can visit our [documentation article](https://praxivesoftware.github.io/samurai/getting-started/userchrome/) for this task.
+if you want to style the browser, you can visit our [documentation article](https://praxivesoftware.github.io/Samurai/getting-started/userchrome/) for this task.
 
 Details from the `samurai.json` config file:
 

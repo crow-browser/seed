@@ -35,7 +35,7 @@ yarn global add @praxive/samurai
 
 ## Documentation
 
-Documentation is available on [praxivesoftware.github.io/samurai](https://praxivesoftware.github.io/samurai) or in the docs folder of this repository.
+Documentation is available on [praxivesoftware.github.io/samurai](https://praxivesoftware.github.io/Samurai) or in the docs folder of this repository.
 
 ## Licencing notes
 

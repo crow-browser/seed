@@ -1,16 +1,16 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import execa from 'execa'
-import { promises as fs } from 'node:fs'
-import { writeFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs'
-import { copyFile } from 'node:fs/promises'
-import { join, dirname } from 'node:path'
+import execa from "execa";
+import { promises as fs } from "node:fs";
+import { writeFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
+import { copyFile } from "node:fs/promises";
+import { join, dirname } from "node:path";
 
-import prompts from 'prompts'
-import { BIN_NAME } from '../constants'
+import prompts from "prompts";
+import { BIN_NAME } from "../constants";
 
-import { log } from '../log'
+import { log } from "../log";
 import {
   Config,
   configPath,
@@ -19,7 +19,7 @@ import {
   projectDirectory,
   SupportedProducts,
   walkDirectory,
-} from '../utils'
+} from "../utils";
 
 // =============================================================================
 // User interaction portion
@@ -27,110 +27,110 @@ import {
 export async function setupProject(): Promise<void> {
   try {
     if (existsSync(configPath)) {
-      log.warning('There is already a config file. This will overwrite it!')
-      await delay(1000)
+      log.warning("There is already a config file. This will overwrite it!");
+      await delay(1000);
     }
 
-    if (configPath.includes('.optional')) {
+    if (configPath.includes(".optional")) {
       log.error(
         'The text ".optional" cannot be in the path to your custom browser'
-      )
-      process.exit(1)
+      );
+      process.exit(1);
     }
 
     // Ask user for assorted information
     const { product } = await prompts({
-      type: 'select',
-      name: 'product',
-      message: 'Select a product to fork',
+      type: "select",
+      name: "product",
+      message: "Select a product to fork",
       choices: [
         {
-          title: 'Firefox stable',
-          description: 'Releases around every 4 weeks, fairly stable',
+          title: "Firefox stable",
+          description: "Releases around every 4 weeks, fairly stable",
           value: SupportedProducts.Firefox,
         },
         {
-          title: 'Firefox extended support (older)',
+          title: "Firefox extended support (older)",
           description:
-            'The extended support version of Firefox. Will receive security updates for a longer period of time and less frequent, bigger, feature updates',
+            "The extended support version of Firefox. Will receive security updates for a longer period of time and less frequent, bigger, feature updates",
           value: SupportedProducts.FirefoxESR,
         },
         {
-          title: 'Firefox developer edition (Not recommended)',
-          description: 'Tracks firefox beta, with a few config tweaks',
+          title: "Firefox developer edition (Not recommended)",
+          description: "Tracks firefox beta, with a few config tweaks",
           value: SupportedProducts.FirefoxDevelopment,
         },
         {
-          title: 'Firefox beta (Not recommended)',
-          description: 'Updates every 4 weeks. It will have unresolved bugs',
+          title: "Firefox beta (Not recommended)",
+          description: "Updates every 4 weeks. It will have unresolved bugs",
           value: SupportedProducts.FirefoxBeta,
         },
         {
-          title: 'Firefox Nightly (Not recommended)',
+          title: "Firefox Nightly (Not recommended)",
           description:
-            'Updates daily, with many bugs. Practically impossible to track',
+            "Updates daily, with many bugs. Practically impossible to track",
           value: SupportedProducts.FirefoxNightly,
         },
       ],
-    })
+    });
 
-    if (typeof product === 'undefined') return
+    if (typeof product === "undefined") return;
 
-    const productVersion = await getLatestFF(product)
+    const productVersion = await getLatestFF(product);
 
     const { version, name, appId, vendor, ui, binaryName } = await prompts([
       {
-        type: 'text',
-        name: 'version',
-        message: 'Enter the version of this product',
+        type: "text",
+        name: "version",
+        message: "Enter the version of this product",
         initial: productVersion,
       },
       {
-        type: 'text',
-        name: 'name',
-        message: 'Enter a product name',
-        initial: 'Example browser',
+        type: "text",
+        name: "name",
+        message: "Enter a product name",
+        initial: "Example browser",
       },
       {
-        type: 'text',
-        name: 'binaryName',
-        message: 'Enter the name of the binary',
-        initial: 'example-browser',
+        type: "text",
+        name: "binaryName",
+        message: "Enter the name of the binary",
+        initial: "example-browser",
       },
       {
-        type: 'text',
-        name: 'vendor',
-        message: 'Enter a vendor',
-        initial: 'Example company',
+        type: "text",
+        name: "vendor",
+        message: "Enter a vendor",
+        initial: "Example company",
       },
       {
-        type: 'text',
-        name: 'appId',
-        message: 'Enter an appid',
-        initial: 'com.example.browser',
+        type: "text",
+        name: "appId",
+        message: "Enter an appid",
+        initial: "com.example.browser",
         // Horrible validation to make sure people don't chose something entirely wrong
-        validate: (t: string) => t.includes('.'),
+        validate: (t: string) => t.includes("."),
       },
       {
-        type: 'select',
-        name: 'ui',
-        message: 'Select a ui mode template',
+        type: "select",
+        name: "ui",
+        message: "Select a ui mode template",
         choices: [
           {
-            title: 'None',
+            title: "None",
             description:
-              'No files for the ui will be created, we will let you find that out on your own',
-            value: 'none',
+              "No files for the ui will be created, we will let you find that out on your own",
+            value: "none",
           },
           {
-            title: 'UserChrome',
-            value: 'uc',
+            title: "UserChrome",
+            value: "uc",
           },
           // TODO: We also need to add extension based theming like the version
           // used in Pulse Browser
         ],
       },
-    ])
+    ]);
 
     const config: Partial<Config> = {
       name,
@@ -141,37 +141,37 @@ export async function setupProject(): Promise<void> {
       buildOptions: {
         windowsUseSymbolicLinks: false,
       },
+    };
+
+    await copyRequired();
+
+    if (ui === "uc") {
+      await copyOptional(["browser/themes"]);
     }
 
-    await copyRequired()
-
-    if (ui === 'uc') {
-      await copyOptional(['browser/themes'])
-    }
-
-    writeFileSync(configPath, JSON.stringify(config, undefined, 2))
+    writeFileSync(configPath, JSON.stringify(config, undefined, 2));
 
     // Append important stuff to gitignore
-    const gitignore = join(projectDirectory, '.gitignore')
-    let gitignoreContents = ''
+    const gitignore = join(projectDirectory, ".gitignore");
+    let gitignoreContents = "";
 
     if (existsSync(gitignore)) {
-      gitignoreContents = readFileSync(gitignore).toString()
+      gitignoreContents = readFileSync(gitignore).toString();
     }
 
     gitignoreContents +=
-      '\n.dotbuild/\n.samurai/\n.engine/\nfirefox-*/\nnode_modules/\n'
+      "\n.dotbuild/\n.samurai/\n.engine/\nfirefox-*/\nnode_modules/\n";
 
-    writeFileSync(gitignore, gitignoreContents)
+    writeFileSync(gitignore, gitignoreContents);
 
     log.success(
-      'Project setup complete!',
-      '',
+      "Project setup complete!",
+      "",
       `You can start downloading the Firefox source code by running |${BIN_NAME} download|`,
-      'Or you can follow the getting started guide at https://praxivesoftware.github.io/samurai/getting-started/overview/'
-    )
+      "Or you can follow the getting started guide at https://praxivesoftware.github.io/Samurai/getting-started/overview/"
+    );
   } catch (error) {
-    log.error(error)
+    log.error(error);
   }
 }
 
@@ -179,7 +179,7 @@ export async function setupProject(): Promise<void> {
 // Filesystem templating
 
 // eslint-disable-next-line unicorn/prefer-module
-export const templateDirectory = join(__dirname, '../..', 'template')
+export const templateDirectory = join(__dirname, "../..", "template");
 
 /**
  * Copy files from the template directory that have .optional in their path,
@@ -188,18 +188,18 @@ export const templateDirectory = join(__dirname, '../..', 'template')
  * @param files The files that should be coppied
  */
 async function copyOptional(files: string[]) {
-  const directoryContents = await walkDirectory(templateDirectory)
+  const directoryContents = await walkDirectory(templateDirectory);
   for (const file of directoryContents) {
-    if (shouldSkipOptionalCopy(file, files)) continue
+    if (shouldSkipOptionalCopy(file, files)) continue;
 
     const outLocation = join(
       projectDirectory,
-      file.replace(templateDirectory, '')
-    ).replace('.optional', '')
+      file.replace(templateDirectory, "")
+    ).replace(".optional", "");
 
     if (!existsSync(outLocation)) {
-      mkdirSync(dirname(outLocation), { recursive: true })
-      await copyFile(file, outLocation)
+      mkdirSync(dirname(outLocation), { recursive: true });
+      await copyFile(file, outLocation);
     }
   }
 }
@@ -219,27 +219,27 @@ export function shouldSkipOptionalCopy(file: string, files: string[]): boolean {
   // - It is not optional
   // - It is not in the files array
   return (
-    !file.includes('.optional') ||
+    !file.includes(".optional") ||
     !files.map((f) => file.includes(f)).some(Boolean)
-  )
+  );
 }
 
 /**
  * Copy all non-optional files from the template directory
  **/
 async function copyRequired() {
-  const directoryContents = await walkDirectory(templateDirectory)
+  const directoryContents = await walkDirectory(templateDirectory);
 
   for (const file of directoryContents) {
-    if (file.includes('.optional')) continue
+    if (file.includes(".optional")) continue;
     const outLocation = join(
       projectDirectory,
-      file.replace(templateDirectory, '')
-    )
+      file.replace(templateDirectory, "")
+    );
 
     if (!existsSync(outLocation)) {
-      mkdirSync(dirname(outLocation), { recursive: true })
-      await copyFile(file, outLocation)
+      mkdirSync(dirname(outLocation), { recursive: true });
+      await copyFile(file, outLocation);
     }
   }
 }

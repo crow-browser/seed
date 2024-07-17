@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 html {
   font-kerning: normal;
@@ -72,7 +72,7 @@ h4 {
     .anchor {
       visibility: visible;
       animation: fade-in 0.3s ease-in-out;
-      font-family: 'FabricMDL2Icons';
+      font-family: "FabricMDL2Icons";
     }
   }
 }
@@ -110,7 +110,7 @@ code {
 }
 
 .copy-code-button {
-  font-family: 'FabricMDL2Icons';
+  font-family: "FabricMDL2Icons";
   display: none;
   background: $background;
   border-radius: 4px;
@@ -160,7 +160,7 @@ nav {
 
     &::before {
       display: inline-block;
-      content: '';
+      content: "";
     }
 
     ul {
@@ -181,8 +181,8 @@ main {
 
   &::before {
     display: inline-block;
-    content: '\EE2E';
-    font-family: 'FabricMDL2Icons';
+    content: "\EE2E";
+    font-family: "FabricMDL2Icons";
     margin-right: calc(#{$baseline} / 8);
   }
 }
@@ -231,8 +231,8 @@ nav label {
 
 .tree-toggle-label::before {
   display: inline-block;
-  content: '\E970';
-  font-family: 'FabricMDL2Icons';
+  content: "\E970";
+  font-family: "FabricMDL2Icons";
   font-size: 0.75rem;
   transform: rotate(0deg);
   transform-origin: 50% 50% 0px;
@@ -247,8 +247,8 @@ nav label {
 }
 
 .tree-toggle:checked + .tree-toggle-label::before {
-  content: '\E970';
-  font-family: 'FabricMDL2Icons';
+  content: "\E970";
+  font-family: "FabricMDL2Icons";
   font-size: 0.75rem;
   transform: rotate(90deg);
   transform-origin: 50% 50% 0px;
@@ -281,8 +281,8 @@ nav label {
   }
 
   &::before {
-    content: '\E7C3';
-    font-family: 'FabricMDL2Icons';
+    content: "\E7C3";
+    font-family: "FabricMDL2Icons";
     font-size: 0.75rem;
   }
 }
@@ -323,7 +323,7 @@ article {
   }
 
   #mobile {
-    font-family: 'FabricMDL2Icons';
+    font-family: "FabricMDL2Icons";
     cursor: pointer;
     font-size: $baseline;
     margin: 0 $baseline 0 0;
@@ -346,5 +346,5 @@ article {
   }
 }
 
-@import 'fabric-icons-inline';
-@import 'search';
+@import "fabric-icons-inline";
+@import "search";

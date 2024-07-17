@@ -8,7 +8,7 @@ export function stringTemplate(
   template: string,
   variables: { [key: string]: string | number }
 ): string {
-  let temporary = template
+  let temporary = template;
 
   for (const variable in variables) {
     // Replace only replaces the first instance of a string. We want to
@@ -17,9 +17,9 @@ export function stringTemplate(
       temporary = temporary.replace(
         `\${${variable}}`,
         variables[variable].toString()
-      )
+      );
     }
   }
 
-  return temporary
+  return temporary;
 }

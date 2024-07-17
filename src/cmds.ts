@@ -4,186 +4,186 @@
 
 /* eslint-disable unicorn/no-await-expression-member */
 
-import { Cmd } from './types'
+import { Cmd } from "./types";
 
 export const commands: Cmd[] = [
   {
-    cmd: 'bootstrap',
-    description: 'Bootstrap the samurai app.',
+    cmd: "bootstrap",
+    description: "Bootstrap the samurai app.",
     requestController: async () =>
-      (await import('./commands/bootstrap')).bootstrap,
+      (await import("./commands/bootstrap")).bootstrap,
   },
   {
-    cmd: 'build',
-    aliases: ['b'],
+    cmd: "build",
+    aliases: ["b"],
     description:
-      'Build the samurai app. Specify the OS param for cross-platform builds.',
+      "Build the samurai app. Specify the OS param for cross-platform builds.",
     options: [
       {
-        arg: '--u, --ui',
+        arg: "--u, --ui",
         description:
-          'Only builds the ui. Faster but not as powerful as a regular build.',
+          "Only builds the ui. Faster but not as powerful as a regular build.",
       },
       {
-        arg: '--skip-patch-check',
+        arg: "--skip-patch-check",
         description:
           "Doesn't check to see if all of the patches have been applied",
       },
     ],
-    requestController: async () => (await import('./commands/build')).build,
+    requestController: async () => (await import("./commands/build")).build,
   },
   {
-    cmd: 'commit',
+    cmd: "commit",
     description:
-      'Commit the changes of the project root to the git repository.',
-    requestController: async () => (await import('./commands/commit')).commit,
+      "Commit the changes of the project root to the git repository.",
+    requestController: async () => (await import("./commands/commit")).commit,
   },
   {
-    cmd: 'config <key> [value]',
-    aliases: ['set', 'get'],
-    description: 'Get and set the dynamic config from this project',
-    requestController: async () => (await import('./commands/set')).set,
+    cmd: "config <key> [value]",
+    aliases: ["set", "get"],
+    description: "Get and set the dynamic config from this project",
+    requestController: async () => (await import("./commands/set")).set,
     disableMiddleware: true,
   },
   {
-    cmd: 'check',
-    description: 'Check for prerequisites',
-    requestController: async () => (await import('./commands/check')).check,
+    cmd: "check",
+    description: "Check for prerequisites",
+    requestController: async () => (await import("./commands/check")).check,
   },
   {
-    cmd: 'ci',
-    description: 'Configure the CI',
-    requestController: async () => (await import('./commands/ci')).ci,
+    cmd: "ci",
+    description: "Configure the CI",
+    requestController: async () => (await import("./commands/ci")).ci,
     options: [
       {
-        arg: '--brand <brand>',
-        description: 'Set the brand that the build is using',
+        arg: "--brand <brand>",
+        description: "Set the brand that the build is using",
       },
       {
-        arg: '--bump <section>',
-        description: 'What version should be bumped',
+        arg: "--bump <section>",
+        description: "What version should be bumped",
       },
       {
-        arg: '--display-version <version>',
-        description: 'Bind this CI instance to a specific version',
+        arg: "--display-version <version>",
+        description: "Bind this CI instance to a specific version",
       },
     ],
   },
   {
-    cmd: 'discard <file>',
-    description: 'Discard a files changes.',
-    requestController: async () => (await import('./commands/discard')).discard,
+    cmd: "discard <file>",
+    description: "Discard a files changes.",
+    requestController: async () => (await import("./commands/discard")).discard,
   },
   {
-    cmd: 'download',
-    description: 'Download Firefox.',
+    cmd: "download",
+    description: "Download Firefox.",
     options: [
       {
-        arg: '--force',
-        description: 'Delete the .engine directory if it already exists',
+        arg: "--force",
+        description: "Delete the .engine directory if it already exists",
       },
     ],
     requestController: async () =>
-      (await import('./commands/download')).download,
+      (await import("./commands/download")).download,
   },
   {
-    cmd: 'download-mb-pip',
-    description: 'Download the required MozillaBuild and Python packages.',
+    cmd: "download-mb-pip",
+    description: "Download the required MozillaBuild and Python packages.",
     requestController: async () =>
-      (await import('./commands/download/firefox')).handleMozillaPipChecks,
+      (await import("./commands/download/firefox")).handleMozillaPipChecks,
   },
   {
-    cmd: 'update',
-    aliases: ['update-ff'],
-    description: 'Update Firefox to latest version.',
-    requestController: async () => (await import('./commands/update')).update,
+    cmd: "update",
+    aliases: ["update-ff"],
+    description: "Update Firefox to latest version.",
+    requestController: async () => (await import("./commands/update")).update,
     disableMiddleware: true,
   },
   {
-    cmd: 'execute',
-    description: 'Execute a command inside the .engine directory.',
-    requestController: async () => (await import('./commands/execute')).execute,
+    cmd: "execute",
+    description: "Execute a command inside the .engine directory.",
+    requestController: async () => (await import("./commands/execute")).execute,
   },
   {
-    cmd: 'export-file <file>',
-    aliases: ['export'],
-    description: 'Export a changed file as a patch.',
+    cmd: "export-file <file>",
+    aliases: ["export"],
+    description: "Export a changed file as a patch.",
     requestController: async () =>
-      (await import('./commands/export-file')).exportFile,
+      (await import("./commands/export-file")).exportFile,
   },
   {
-    cmd: 'import',
-    aliases: ['import-patches', 'i'],
-    description: 'Import patches into the browser.',
+    cmd: "import",
+    aliases: ["import-patches", "i"],
+    description: "Import patches into the browser.",
     requestController: async () =>
-      (await import('./commands/patches')).applyPatches,
+      (await import("./commands/patches")).applyPatches,
   },
   {
-    cmd: 'ff-init <source>',
-    aliases: ['ff-initialise', 'ff-initialize'],
-    description: 'Initialise the Firefox directory.',
-    requestController: async () => (await import('./commands/init')).init,
+    cmd: "ff-init <source>",
+    aliases: ["ff-initialise", "ff-initialize"],
+    description: "Initialise the Firefox directory.",
+    requestController: async () => (await import("./commands/init")).init,
   },
   {
-    cmd: 'ff-version',
-    description: 'Retrieves the version of firefox to build against',
+    cmd: "ff-version",
+    description: "Retrieves the version of firefox to build against",
     requestController: async () =>
-      (await import('./commands/ff-version')).getFFVersion,
+      (await import("./commands/ff-version")).getFFVersion,
   },
   {
-    cmd: 'license-check',
-    aliases: ['lc'],
+    cmd: "license-check",
+    aliases: ["lc"],
     options: [
       {
-        arg: '--fix',
+        arg: "--fix",
         description: "Will add MPL-2.0 headers to files that don't have it",
       },
     ],
-    description: 'Check the src directory for the absence of MPL-2.0 header.',
+    description: "Check the src directory for the absence of MPL-2.0 header.",
     requestController: async () =>
-      (await import('./commands/license-check')).licenseCheck,
+      (await import("./commands/license-check")).licenseCheck,
   },
   {
-    cmd: 'package',
-    aliases: ['pack'],
-    description: 'Package the browser for distribution.',
+    cmd: "package",
+    aliases: ["pack"],
+    description: "Package the browser for distribution.",
     requestController: async () =>
-      (await import('./commands/package')).gluonPackage,
+      (await import("./commands/package")).gluonPackage,
   },
   {
-    cmd: 'reset',
-    description: 'Reset the source directory to stock Firefox.',
-    requestController: async () => (await import('./commands/reset')).reset,
+    cmd: "reset",
+    description: "Reset the source directory to stock Firefox.",
+    requestController: async () => (await import("./commands/reset")).reset,
   },
   {
-    cmd: 'run [chrome]',
-    aliases: ['r', 'open'],
-    description: 'Run the browser.',
-    requestController: async () => (await import('./commands/run')).run,
+    cmd: "run [chrome]",
+    aliases: ["r", "open"],
+    description: "Run the browser.",
+    requestController: async () => (await import("./commands/run")).run,
   },
   {
-    cmd: 'setup-project',
-    description: 'Sets up a samurai project for the first time',
+    cmd: "setup-project",
+    description: "Sets up a samurai project for the first time",
     requestController: async () =>
-      (await import('./commands/setup-project')).setupProject,
+      (await import("./commands/setup-project")).setupProject,
   },
   {
-    cmd: 'status',
-    description: 'Status and files changed for src directory.',
-    requestController: async () => (await import('./commands/status')).status,
+    cmd: "status",
+    description: "Status and files changed for src directory.",
+    requestController: async () => (await import("./commands/status")).status,
   },
   {
-    cmd: 'updates-browser',
+    cmd: "updates-browser",
     description:
-      'Generate update manifest for the browser binary. This should be run after packaging',
+      "Generate update manifest for the browser binary. This should be run after packaging",
     requestController: async () =>
-      (await import('./commands/updates/browser')).generateBrowserUpdateFiles,
+      (await import("./commands/updates/browser")).generateBrowserUpdateFiles,
   },
   {
-    cmd: 'updates-addons',
+    cmd: "updates-addons",
     description:
-      'Generates update manifests for system addons that are included in the browser',
+      "Generates update manifests for system addons that are included in the browser",
     requestController: async () =>
-      (await import('./commands/updates/addons')).generateAddonUpdateFiles,
+      (await import("./commands/updates/addons")).generateAddonUpdateFiles,
   },
-]
+];

@@ -3,5 +3,5 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 export const delay = (delay: number): Promise<boolean> =>
   new Promise((resolve) => {
-    setTimeout(() => resolve(true), delay)
-  })
+    setTimeout(() => resolve(true), delay);
+  });

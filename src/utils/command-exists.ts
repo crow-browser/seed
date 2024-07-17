@@ -21,29 +21,29 @@
 // Adapted from the `command-exists` node module
 // https://github.com/mathisonian/command-exists
 
-import { execSync } from 'node:child_process'
-import { accessSync, constants } from 'node:fs'
-import path from 'node:path'
+import { execSync } from "node:child_process";
+import { accessSync, constants } from "node:fs";
+import path from "node:path";
 
-const onWindows = process.platform == 'win32'
+const onWindows = process.platform == "win32";
 
 const fileNotExistsSync = (commandName: string): boolean => {
   try {
-    accessSync(commandName, constants.F_OK)
-    return false
+    accessSync(commandName, constants.F_OK);
+    return false;
   } catch {
-    return true
+    return true;
   }
-}
+};
 
 const localExecutableSync = (commandName: string): boolean => {
   try {
-    accessSync(commandName, constants.F_OK | constants.X_OK)
-    return true
+    accessSync(commandName, constants.F_OK | constants.X_OK);
+    return true;
   } catch {
-    return false
+    return false;
   }
-}
+};
 
 const commandExistsUnixSync = function (
   commandName: string,
@@ -52,20 +52,20 @@ const commandExistsUnixSync = function (
   if (fileNotExistsSync(commandName)) {
     try {
       const stdout = execSync(
-        'command -v ' +
+        "command -v " +
           cleanedCommandName +
-          ' 2>/dev/null' +
-          ' && { echo >&1 ' +
+          " 2>/dev/null" +
+          " && { echo >&1 " +
           cleanedCommandName +
-          '; exit 0; }'
-      )
-      return !!stdout
+          "; exit 0; }"
+      );
+      return !!stdout;
     } catch {
-      return false
+      return false;
     }
   }
-  return localExecutableSync(commandName)
-}
+  return localExecutableSync(commandName);
+};
 
 const commandExistsWindowsSync = function (
   commandName: string,
@@ -77,44 +77,44 @@ const commandExistsWindowsSync = function (
       commandName
     )
   ) {
-    return false
+    return false;
   }
   try {
-    const stdout = execSync('where ' + cleanedCommandName, { stdio: [] })
-    return !!stdout
+    const stdout = execSync("where " + cleanedCommandName, { stdio: [] });
+    return !!stdout;
   } catch {
-    return false
+    return false;
   }
-}
+};
 
 function cleanInput(toBeCleaned: string): string {
   // Windows has a different cleaning process to Unix, so we should go through
   // that process first
   if (onWindows) {
-    const isPathName = /\\/.test(toBeCleaned)
+    const isPathName = /\\/.test(toBeCleaned);
     if (isPathName) {
-      const dirname = '"' + path.dirname(toBeCleaned) + '"'
-      const basename = '"' + path.basename(toBeCleaned) + '"'
-      return `${dirname}:${basename}`
+      const dirname = '"' + path.dirname(toBeCleaned) + '"';
+      const basename = '"' + path.basename(toBeCleaned) + '"';
+      return `${dirname}:${basename}`;
     }
 
-    return `"${toBeCleaned}"`
+    return `"${toBeCleaned}"`;
   }
 
   // Otherwise go through the unix cleaning process
   if (/[^\w/:=\\-]/.test(toBeCleaned)) {
-    toBeCleaned = "'" + toBeCleaned.replace(/'/g, "'\\''") + "'"
+    toBeCleaned = "'" + toBeCleaned.replace(/'/g, "'\\''") + "'";
     toBeCleaned = toBeCleaned
-      .replace(/^(?:'')+/g, '') // unduplicate single-quote at the beginning
-      .replace(/\\'''/g, "\\'") // remove non-escaped single-quote if there are enclosed between 2 escaped
+      .replace(/^(?:'')+/g, "") // unduplicate single-quote at the beginning
+      .replace(/\\'''/g, "\\'"); // remove non-escaped single-quote if there are enclosed between 2 escaped
   }
 
-  return toBeCleaned
+  return toBeCleaned;
 }
 
 export function commandExistsSync(commandName: string): boolean {
-  const cleanedCommandName = cleanInput(commandName)
+  const cleanedCommandName = cleanInput(commandName);
   return onWindows
     ? commandExistsWindowsSync(commandName, cleanedCommandName)
-    : commandExistsUnixSync(commandName, cleanedCommandName)
+    : commandExistsUnixSync(commandName, cleanedCommandName);
 }

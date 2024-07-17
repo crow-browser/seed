@@ -1,10 +1,11 @@
-base_url = "https://praxivesoftware.github.io/samurai"
+base_url = "https://praxivesoftware.github.io/Samurai"
 title = "Samurai"
 description = "Build Firefox-based browsers with ease"
 default_language = "en"
 compile_sass = true
 build_search_index = true
 minify_html = true
+theme="after-dark"
 
 author = "TrickyPR"
 

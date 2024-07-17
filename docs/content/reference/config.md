@@ -72,7 +72,7 @@ interface LicenseConfig {
    *
    * To disable the license checker, set this type to `unknown`
    */
-  licenseType: 'MPL-2.0' | 'unknown'
+  licenseType: "MPL-2.0" | "unknown";
   /**
    * Files to be ignored by the license checker. For default values see the
    * `defaultConfig` variable in the config.ts file
@@ -81,7 +81,7 @@ interface LicenseConfig {
    * fast which will stop the license checker from becoming absurdly slow with
    * larger projects
    */
-  ignoredFiles: string[]
+  ignoredFiles: string[];
 }
 ```
 
@@ -109,12 +109,12 @@ Specification:
 
 ```typescript
 enum SupportedProducts {
-  Firefox = 'firefox',
-  FirefoxESR = 'firefox-esr',
-  FirefoxESRNext = 'firefox-esr-next',
-  FirefoxDev = 'firefox-dev',
-  FirefoxBeta = 'firefox-beta',
-  FirefoxNightly = 'firefox-nightly',
+  Firefox = "firefox",
+  FirefoxESR = "firefox-esr",
+  FirefoxESRNext = "firefox-esr-next",
+  FirefoxDev = "firefox-dev",
+  FirefoxBeta = "firefox-beta",
+  FirefoxNightly = "firefox-nightly",
 }
 
 interface VersionConfig {
@@ -124,11 +124,11 @@ interface VersionConfig {
    *
    * For use in code, use {@link SupportedProducts}
    */
-  product: SupportedProducts
+  product: SupportedProducts;
   /**
    * The version of the selected product you are forking
    */
-  version?: string
+  version?: string;
 }
 ```
 
@@ -159,30 +159,30 @@ Specification:
 
 ```typescript
 export interface GithubAddonInfo {
-  platform: 'github'
-  id: string
-  repo: string
-  version: string
-  fileGlob: string
+  platform: "github";
+  id: string;
+  repo: string;
+  version: string;
+  fileGlob: string;
 }
 
 export interface AMOAddonInfo {
-  platform: 'amo'
-  id: string
-  amoId: string
-  version: string
+  platform: "amo";
+  id: string;
+  amoId: string;
+  version: string;
 }
 
 export interface UrlAddonInfo {
-  platform: 'url'
-  version: string
-  id: string
-  url: string
+  platform: "url";
+  version: string;
+  id: string;
+  url: string;
 }
 
-export type AddonInfo = GithubAddonInfo | AMOAddonInfo | UrlAddonInfo
+export type AddonInfo = GithubAddonInfo | AMOAddonInfo | UrlAddonInfo;
 
-type addons = Record<string, AddonInfo>
+type addons = Record<string, AddonInfo>;
 ```
 
 Example:
@@ -225,27 +225,27 @@ export interface ReleaseInfo {
   /**
    * The version of your output product. E.g. 1.3.5
    */
-  displayVersion: string
+  displayVersion: string;
   github?: {
-    repo: string
-  }
+    repo: string;
+  };
 
   x86?: {
-    windowsMar?: string
-    macosMar?: string
-    linuxMar?: string
-  }
+    windowsMar?: string;
+    macosMar?: string;
+    linuxMar?: string;
+  };
 }
 
 export interface BrandInfo {
-  backgroundColor: string
-  brandShorterName: string
-  brandShortName: string
-  brandFullName: string
-  release: ReleaseInfo
+  backgroundColor: string;
+  brandShorterName: string;
+  brandShortName: string;
+  brandFullName: string;
+  release: ReleaseInfo;
 }
 
-type brands = Record<string, BrandInfo>
+type brands = Record<string, BrandInfo>;
 ```
 
 Example:

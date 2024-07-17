@@ -4,20 +4,20 @@ module.exports = {
     node: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:unicorn/recommended',
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:unicorn/recommended",
   ],
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  plugins: ['@typescript-eslint', 'unicorn'],
+  plugins: ["@typescript-eslint", "unicorn"],
   rules: {
-    'unicorn/no-process-exit': 0,
+    "unicorn/no-process-exit": 0,
     // We are currently using commonjs. If / when it becomes viable for us to
     // switch to ESModules, we should consider enabling this rule
-    'unicorn/prefer-module': 0,
+    "unicorn/prefer-module": 0,
   },
-}
+};
