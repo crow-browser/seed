@@ -1,6 +1,6 @@
 {
   "name": "@praxive/samurai",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Build Firefox-based browsers with ease",
   "main": "index.js",
   "reveal": true,
