@@ -24,9 +24,9 @@ If you are having problems with following these instructions, or with samurai in
 The first thing you are going to need to do is to install Samurai. As it is a nodejs program it can be installed through npm or yarn.
 
 ```sh
-npm install -g @praxive/samurai@next
+npm install -g @praxive/samurai@latest
 # or
-yarn global add @praxive/samurai@next
+yarn global add @praxive/samurai@latest
 
 # Note: Linux and mac users may have to run the above command with sudo
 ```
@@ -53,7 +53,7 @@ You can change what version you are bound to at any time. Pulse Browser currentl
 Then next is the version of the browser you want to use. By default samurai will populate this with the latest version available, which we recommend using. Simply click enter to accept.
 
 ```
-? Enter the version of this product › 102.0.1
+? Enter the version of this product › 128.0.0
 ```
 
 Next it will ask for the name of your browser. Avoid references to Firefox or other Mozilla brands, as this is likely to lead to trademark and copyright issues down the road.
