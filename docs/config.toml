@@ -5,7 +5,7 @@ default_language = "en"
 compile_sass = true
 build_search_index = true
 minify_html = true
-theme="after-dark"
+theme="--force"
 
 author = "TrickyPR"
 
