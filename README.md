@@ -18,17 +18,17 @@ Build Firefox-based browsers with ease
 Per project (recommended):
 
 ```sh
-npm install @praxive/samurai@latest
+npm install @praxive/samurai
 # or
-yarn add @praxive/samurai@latest
+yarn add @praxive/samurai
 ```
 
 Globally:
 
 ```sh
-npm install -g @praxive/samurai@latest
+npm install -g @praxive/samurai
 # or
-yarn global add @praxive/samurai@latest
+yarn global add @praxive/samurai
 
 # Note: Linux and mac users may have to run the above command with sudo
 ```
