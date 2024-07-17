@@ -30,7 +30,6 @@ jobs:
         run: yarn lint
       
       - name: Publish to NPM
-        run: yarn publish
+        run: yarn publish --access public --non-interactive
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          
