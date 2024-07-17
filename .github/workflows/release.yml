@@ -1,9 +1,9 @@
-name: CI
+name: Release/CI
 
 on:
-  push:
-  pull_request:
   workflow_dispatch:
+  release:
+    types: [created]
 
 jobs:
   general:
@@ -28,3 +28,9 @@ jobs:
 
       - name: Lint
         run: yarn lint
+      
+      - name: Publish to NPM
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
