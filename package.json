@@ -10,7 +10,7 @@
   "scripts": {
     "test": "jest",
     "test:dev": "jest --watch",
-    "build": "tsc && (attrib +x ./dist/index.js || icacls ./dist/index.js /grant Everyone:(OI)(CI)F)",
+    "build": "tsc",
     "build:win": "tsc && copy /y src\\commands\\license-check.txt dist\\commands\\license-check.txt",
     "format": "prettier . -w",
     "lint": "eslint .",
@@ -19,7 +19,6 @@
     "docs:dev": "zola --root docs/ serve",
     "self": "cd testing && node ../dist/index.js"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PraxiveSoftware/samurai.git"
