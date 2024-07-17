@@ -4,7 +4,6 @@ description = "Build Firefox-based browsers with ease"
 default_language = "en"
 compile_sass = true
 build_search_index = true
-theme = "after-dark"
 minify_html = true
 
 author = "TrickyPR"
