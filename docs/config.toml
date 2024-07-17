@@ -4,14 +4,13 @@ description = "Build Firefox-based browsers with ease"
 default_language = "en"
 compile_sass = true
 build_search_index = true
-theme = "some-theme" # Setzen Sie hier den Namen Ihres Zola-Themas ein
-minify_html = true # Optional, verbessert die Ladegeschwindigkeit der Seite
+theme = "hugo-theme-sam"
+minify_html = true
 
 author = "TrickyPR"
 
 [markdown]
 highlight_code = true
-# `highlight_theme` kann hier gesetzt werden, wenn Syntax-Highlighting verwendet wird
 
 [extra]
 logo = "https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Package/3D/package_3d.png"
