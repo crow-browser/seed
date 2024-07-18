@@ -11,8 +11,8 @@ If you are having problems with following these instructions, or with samurai in
 ### System requirements
 
 - **OS**: Linux, MacOS and Windows (Support for Windows is experimental)
-- **Disk space**: 100GB
-- **RAM**: 16GB (8GB minimum, not recommended)
+- **Disk space**: 40GB
+- **RAM**: 12GB (4GB minimum, not recommended)
 - **CPU**: 4 cores
 - **Dependencies**: NodeJS, Python3, pip3, git
 - **Optional dependencies**: MozillaBuild (Windows only) (download: [here](https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe))
