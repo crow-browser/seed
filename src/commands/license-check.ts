@@ -1,6 +1,3 @@
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
@@ -8,24 +5,24 @@ import { SRC_DIR } from "../constants";
 import { walkDirectory } from "../utils/fs";
 import { Task, TaskList } from "../utils/task-list";
 
-const ignoredFiles = new RegExp(".*\\.(json|patch|md|jpeg|png|gif|tiff|ico)");
-const licenseIgnore = new RegExp("(//|#) Ignore license in this file", "g");
+const ignoredFiles = new RegExp("\\.(json|patch|md|jpeg|png|gif|tiff|ico)$");
+const licenseIgnore = new RegExp("^(//|#) Ignore license in this file$", "g");
 const fixableFiles = [
-  { regex: new RegExp(".*\\.(j|t)s"), comment: "// ", commentClose: "\n" },
+  { regex: new RegExp("\\.(j|t)s$"), comment: "// ", commentClose: "\n" },
   {
-    regex: new RegExp(".*(\\.inc)?\\.css"),
+    regex: new RegExp("\\.inc?\\.css$"),
     commentOpen: "/*\n",
     comment: " * ",
     commentClose: "\n */",
   },
   {
-    regex: new RegExp(".*\\.(html|svg|xml)"),
+    regex: new RegExp("\\.(html|svg|xml)$"),
     commentOpen: "<!--\n",
     comment: "   - ",
     commentClose: "\n   -->",
   },
   {
-    regex: new RegExp(".*\\.py|moz\\.build|jar\\.mn"),
+    regex: new RegExp("\\.py$|moz\\.build$|jar\\.mn$"),
     comment: "# ",
     commentClose: "\n",
   },
