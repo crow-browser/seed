@@ -1,8 +1,3 @@
-+++
-title = "Branding your browser"
-weight = 15
-+++
-
 # Branding your browser
 
 Before you ship your browser, you will want to include your own branding, rather than just using Mozilla's template branding. Samurai will automatically generate branding once you configure it correctly.

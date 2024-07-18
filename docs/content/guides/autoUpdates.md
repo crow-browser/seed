@@ -1,8 +1,3 @@
-+++
-title = "Automatic updates"
-weight = 20
-+++
-
 # Automatic updates
 
 > **Note**

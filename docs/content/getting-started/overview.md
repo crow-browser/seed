@@ -1,9 +1,4 @@
-+++
-title = "Setting up your project"
-weight = 5
-+++
-
-## Getting started with samurai
+# Getting started with samurai
 
 ### What is samurai
 

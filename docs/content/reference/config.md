@@ -1,8 +1,3 @@
-+++
-title = "`samurai.json` Reference"
-weight = 0
-+++
-
 # samurai.json Reference
 
 This reference guide may get outdated. If you need to check something, you can read [the config interface type](https://github.com/PraxiveSoftware/samurai/blob/main/src/utils/config.ts#L96).
