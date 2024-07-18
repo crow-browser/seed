@@ -1,8 +1,3 @@
-+++
-title = "Understanding the file structure"
-weight = 10
-+++
-
 # Understanding the file structure
 
 Lets take a look at the file structure of your project. It should look something like this:

@@ -1,8 +1,3 @@
-+++
-title = "Including addons"
-weight = 10
-+++
-
 # Including addons
 
 Samurai provides an automated system for including extensions in your project. The addons are downloaded and included during the `download` build step. Addons can be included in the project config (`samurai.json`).

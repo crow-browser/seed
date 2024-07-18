@@ -1,8 +1,3 @@
-+++
-title = "Removing pocket"
-weight = 5
-+++
-
 # Removing pocket
 
 **Note:** This expects you have samurai setup.
