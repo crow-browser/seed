@@ -1,7 +1,7 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import chalk from "chalk";
+import { colors } from "../constants/colors";
 
 export const versionFormatter = (
   options: ({ name: string; value: string } | null | string)[]
@@ -25,7 +25,7 @@ export const versionFormatter = (
       continue;
     }
 
-    versionResponse += `\t${chalk.bold(argument.name)} ${" ".repeat(
+    versionResponse += `\t${colors.yellow}${argument.name}${colors.reset} ${" ".repeat(
       Math.max(spacesValue - argument.name.length, 0)
     )}   ${argument.value}\n`;
   }

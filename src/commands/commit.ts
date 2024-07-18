@@ -18,12 +18,20 @@ export const commit = async () => {
     stdio: "inherit",
   });
 
-  await execa("git", ["commit", "-m", "chore: commit"], {
-    cwd: projectRoot,
-    stdio: "inherit",
-  });
+  try {
+    await execa("git", ["commit", "-m", "chore: commit"], {
+      cwd: projectRoot,
+      stdio: "inherit",
+    });
+  } catch (error) {
+    await execa("git", ["push origin main --set-upstream"], {
+      cwd: projectRoot,
+      stdio: "inherit",
+    });
+    return log.success(`Committed ${config.name}`);
+  }
 
-  await execa("git", ["push --set-upstream origin main"], {
+  await execa("git", ["push origin main --set-upstream"], {
     cwd: projectRoot,
     stdio: "inherit",
   });

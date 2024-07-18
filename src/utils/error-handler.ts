@@ -1,7 +1,7 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import chalk from "chalk";
+import { colors } from "../constants/colors";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { MELON_DIR } from "../constants";
@@ -12,9 +12,7 @@ export const errorHandler = (error: Error, isUnhandledRej: boolean): never => {
   cc = cc.replace(/(\r\n|\n|\r)/gm, "");
 
   console.log(
-    `\n   ${chalk.redBright.bold(
-      "ERROR"
-    )} An error occurred while running command ["${cc
+    `\n   ${colors.red}ERROR${colors.reset} An error occurred while running command ["${cc
       .split(" ")
       .join('", "')}"]:`
   );

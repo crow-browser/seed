@@ -1,8 +1,8 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import chalk from "chalk";
 import prompts from "prompts";
+import { colors } from "./constants/colors";
 
 const formatToDoubleDigit = (r: number) =>
   r.toString().length == 1 ? `0${r}` : r;
@@ -61,7 +61,7 @@ class Log {
    * @param args The information you want to provide to the user
    */
   info(...arguments_: unknown[]): void {
-    console.info(chalk.blueBright.bold(this.getDiff()), ...arguments_);
+    console.info(colors.blue, this.getDiff(), ...arguments_, colors.reset);
   }
 
   /**
@@ -72,7 +72,7 @@ class Log {
    * @param args The information you want to provide to the user
    */
   warning(...arguments_: unknown[]): void {
-    console.warn(chalk.yellowBright.bold(" WARNING"), ...arguments_);
+    console.warn(colors.yellow, this.getDiff(), ...arguments_, colors.reset);
   }
 
   /**
@@ -82,7 +82,13 @@ class Log {
    * @param args The information you want to provide to the user
    */
   async hardWarning(...arguments_: unknown[]): Promise<void> {
-    console.info("", chalk.bgRed.bold("WARNING"), ...arguments_);
+    console.info(
+      colors.yellow,
+      this.getDiff(),
+      ...arguments_,
+      colors.reset,
+      "\n"
+    );
 
     const { answer } = await prompts({
       type: "confirm",
@@ -100,10 +106,7 @@ class Log {
    */
   success(...arguments_: unknown[]): void {
     console.log();
-    console.log(
-      `\n${chalk.greenBright.bold("SUCCESS")}`,
-      arguments_.join("\n\t")
-    );
+    console.log(colors.green, this.getDiff(), ...arguments_, colors.reset);
   }
 
   /**
@@ -141,7 +144,7 @@ class Log {
    * @param args The information you want to provide to the user
    */
   checkSuccess(...arguments_: unknown[]): void {
-    console.log(`${chalk.greenBright.bold("SUCCESS")}`, arguments_.join(" "));
+    console.log(colors.green, this.getDiff(), ...arguments_, colors.reset);
   }
 
   /**
@@ -150,7 +153,7 @@ class Log {
    * @param args The information you want to provide to the user
    */
   checkError(...arguments_: unknown[]): void {
-    console.log(`${chalk.redBright.bold("ERROR")}`, arguments_.join(" "));
+    console.log(colors.red, this.getDiff(), ...arguments_, colors.reset);
   }
 
   /**
@@ -159,7 +162,7 @@ class Log {
    * @param args The information you want to provide to the user
    */
   checkWarning(...arguments_: unknown[]): void {
-    console.log(`${chalk.yellowBright.bold("WARNING")}`, arguments_.join(" "));
+    console.log(colors.yellow, this.getDiff(), ...arguments_, colors.reset);
   }
 }
 
