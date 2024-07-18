@@ -1,7 +1,7 @@
 <div align="center">
 
 <p align="center">
-  <img width="98" src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Artist%20palette/3D/artist_palette_3d.png"/>
+  <img width="98" src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Dragon/3D/dragon_3d.png"/>
 </p>
 
 # Samurai
