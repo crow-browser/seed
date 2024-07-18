@@ -14,9 +14,6 @@
     "build:win": "tsc && copy /y src\\commands\\license-check.txt dist\\commands\\license-check.txt",
     "format": "prettier . -w",
     "lint": "eslint .",
-    "docs:install": "",
-    "docs:build": "zola --root docs/ build",
-    "docs:dev": "zola --root docs/ serve",
     "self": "cd testing && node ../dist/index.js"
   },
   "repository": {
