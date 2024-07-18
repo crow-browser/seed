@@ -1,4 +1,4 @@
-base_url = "https://praxivesoftware.github.io/Samurai"
+base_url = "https://praxive.gitbook.io/samurai"
 title = "Samurai"
 description = "Build Firefox-based browsers with ease"
 default_language = "en"
