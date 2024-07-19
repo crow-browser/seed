@@ -115,7 +115,7 @@ export async function setupFirefoxSource(version: string) {
   /* await handleMozillaPipChecks(); */
   const firefoxSourceTar = await downloadFirefoxSource(version);
 
-  await unpackFirefoxSource(firefoxSourceTar);
+  await unpackFirefoxSource(firefoxSourceTar as string);
 
   if (!process.env.CI_SKIP_INIT) {
     log.info("Init firefox");
@@ -168,31 +168,31 @@ async function unpackFirefoxSource(name: string): Promise<void> {
 async function downloadFirefoxSource(version: string) {
   const base = `https://archive.mozilla.org/pub/firefox/releases/${version}/source/`;
   const filename = `firefox-${version}.source.tar.xz`;
-
   const url = base + filename;
-
   const fsParent = MELON_TMP_DIR;
   const fsSaveLocation = resolve(fsParent, filename);
 
   log.info(`Locating Firefox release ${version}...`);
 
-  await ensureDirectory(dirname(fsSaveLocation));
+  try {
+    await ensureDirectory(dirname(fsSaveLocation));
 
-  if (existsSync(fsSaveLocation)) {
-    log.info("Using cached download");
+    if (existsSync(fsSaveLocation)) {
+      log.info("Using cached download");
+      return filename;
+    }
+
+    if (existsSync(ENGINE_DIR)) {
+      log.error(`Workspace already exists.\nRemove that workspace and run |${bin_name} download ${version}| again.`);
+      return;
+    }
+
+    log.info(`Downloading Firefox release ${version}...`);
+    await downloadFileToLocation(url, resolve(MELON_TMP_DIR, filename));
     return filename;
+  } catch (error) {
+    log.error(`Failed to download Firefox release ${version}. Please try again.\n\nError: ${(error as any).message}`);
   }
-
-  // Do not re-download if there is already an existing workspace present
-  if (existsSync(ENGINE_DIR))
-    log.error(
-      `Workspace already exists.\nRemove that workspace and run |${bin_name} download ${version}| again.`
-    );
-
-  log.info(`Downloading Firefox release ${version}...`);
-
-  await downloadFileToLocation(url, resolve(MELON_TMP_DIR, filename));
-  return filename;
 }
 
 export async function downloadInternals({
