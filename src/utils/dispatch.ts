@@ -40,7 +40,13 @@ export const configDispatch = (
         break;
       }
 
+      // Use a unix shell on windows
       case "unix": {
+        shell = BASH_PATH || false;
+        break;
+      }
+
+      case "bash": {
         // Bash path provides a unix shell on windows
         shell = BASH_PATH || false;
         break;

@@ -29,6 +29,20 @@ yarn global add @praxive/samurai
 # Note: Linux and mac users may have to run the above command with sudo
 ```
 
+If the installation is loading endlessly or is freezing with yarn or npm, you can try installing it with pnpm. You can install pnpm with the following command:
+
+```sh
+npm install -g pnpm
+# or
+yarn global add pnpm
+```
+
+Then you can install samurai with pnpm:
+
+```sh
+pnpm install -g @praxive/samurai
+```
+
 Now we suggest you to check if you have all the dependencies installed. You can do this by running the following command:
 
 ```sh
