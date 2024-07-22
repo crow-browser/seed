@@ -65,7 +65,7 @@
     "@types/jest": "^27.0.3",
     "@types/listr": "^0.14.4",
     "@types/node": "^20.14.11",
-    "@types/picomatch": "^2.3.0",
+    "@types/picomatch": "^3.0.0",
     "@types/prompts": "^2.4.9",
     "@types/rimraf": "^3.0.0",
     "@types/semver": "^7.3.10",
