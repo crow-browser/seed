@@ -31,7 +31,7 @@ importers:
         version: 3.0.1
       is-apple-silicon:
         specifier: trickypr/is-apple-silicon
-        version: https://codeload.github.com/trickypr/is-apple-silicon/tar.gz/5f75501a1d7566ba9f94174b6825d7bd9d302b6a
+        version: git+https://git@github.com:trickypr/is-apple-silicon.git#5f75501a1d7566ba9f94174b6825d7bd9d302b6a
       kleur:
         specifier: ^4.1.5
         version: 4.1.5
@@ -91,8 +91,8 @@ importers:
         specifier: ^2.4.9
         version: 2.4.9
       '@types/rimraf':
-        specifier: ^3.0.0
-        version: 3.0.2
+        specifier: ^4.0.5
+        version: 4.0.5
       '@types/semver':
         specifier: ^7.3.10
         version: 7.5.8
@@ -822,9 +822,6 @@ packages:
   '@types/fs-extra@9.0.13':
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
 
-  '@types/glob@8.1.0':
-    resolution: {integrity: sha512-IO+MJPVhoqz+28h1qLAcBEH2+xHMK6MTyHJc7MTnnYb6wsoLR29POVGJ7LycmVXIqyy/4/2ShP5sUwTXuOwb/w==}
-
   '@types/graceful-fs@4.1.9':
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
 
@@ -849,9 +846,6 @@ packages:
   '@types/listr@0.14.9':
     resolution: {integrity: sha512-Ncsy/jtO/HZYrupLGcnp1BOswZVsNvggjIjnf2EZ1xECfU4hxcQ3FWvFEyR+/DXssz0HDm74Op/tEsyrB3eV5w==}
 
-  '@types/minimatch@5.1.2':
-    resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
-
   '@types/node@16.9.1':
     resolution: {integrity: sha512-QpLcX9ZSsq3YYUUnD3nFDY8H7wctAhQj/TFKL8Ya8v5fMm3CFXxo8zStsLAl780ltoYoo1WvKUVGBQK+1ifr7g==}
 
@@ -873,8 +867,9 @@ packages:
   '@types/prompts@2.4.9':
     resolution: {integrity: sha512-qTxFi6Buiu8+50/+3DGIWLHM6QuWsEKugJnnP6iv2Mc4ncxE4A/OJkjuVOA+5X0X1S/nq5VJRa8Lu+nwcvbrKA==}
 
-  '@types/rimraf@3.0.2':
-    resolution: {integrity: sha512-F3OznnSLAUxFrCEu/L5PY8+ny8DtcFRjx7fZZ9bycvXRi3KPTRS9HOitGZwvPg0juRhXFWIeKX58cnX5YqLohQ==}
+  '@types/rimraf@4.0.5':
+    resolution: {integrity: sha512-DTCZoIQotB2SUJnYgrEx43cQIUYOlNZz0AZPbKU4PSLYTUdML5Gox0++z4F9kQocxStrCmRNhi4x5x/UlwtKUA==}
+    deprecated: This is a stub types definition. rimraf provides its own type definitions, so you do not need this installed.
 
   '@types/semver@7.5.8':
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
@@ -1606,8 +1601,8 @@ packages:
     resolution: {integrity: sha512-it4HyVAUTKBc6m8e1iXWvXSTdndF7HbdN713+kvLrymxTaU4AUBWrJ4vEooP+V7fexnVD3LKcBshjGGPefSMUQ==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
 
-  is-apple-silicon@https://codeload.github.com/trickypr/is-apple-silicon/tar.gz/5f75501a1d7566ba9f94174b6825d7bd9d302b6a:
-    resolution: {tarball: https://codeload.github.com/trickypr/is-apple-silicon/tar.gz/5f75501a1d7566ba9f94174b6825d7bd9d302b6a}
+  is-apple-silicon@git+https://git@github.com:trickypr/is-apple-silicon.git#5f75501a1d7566ba9f94174b6825d7bd9d302b6a:
+    resolution: {commit: 5f75501a1d7566ba9f94174b6825d7bd9d302b6a, repo: git@github.com:trickypr/is-apple-silicon.git, type: git}
     version: 1.0.1
 
   is-arrayish@0.2.1:
@@ -3524,11 +3519,6 @@ snapshots:
     dependencies:
       '@types/node': 20.14.11
 
-  '@types/glob@8.1.0':
-    dependencies:
-      '@types/minimatch': 5.1.2
-      '@types/node': 20.14.11
-
   '@types/graceful-fs@4.1.9':
     dependencies:
       '@types/node': 20.14.11
@@ -3557,8 +3547,6 @@ snapshots:
       '@types/node': 20.14.11
       rxjs: 6.6.7
 
-  '@types/minimatch@5.1.2': {}
-
   '@types/node@16.9.1': {}
 
   '@types/node@17.0.45': {}
@@ -3578,10 +3566,9 @@ snapshots:
       '@types/node': 20.14.11
       kleur: 3.0.3
 
-  '@types/rimraf@3.0.2':
+  '@types/rimraf@4.0.5':
     dependencies:
-      '@types/glob': 8.1.0
-      '@types/node': 20.14.11
+      rimraf: 3.0.2
 
   '@types/semver@7.5.8': {}
 
@@ -4357,7 +4344,7 @@ snapshots:
 
   ini@3.0.1: {}
 
-  is-apple-silicon@https://codeload.github.com/trickypr/is-apple-silicon/tar.gz/5f75501a1d7566ba9f94174b6825d7bd9d302b6a: {}
+  is-apple-silicon@git+https://git@github.com:trickypr/is-apple-silicon.git#5f75501a1d7566ba9f94174b6825d7bd9d302b6a: {}
 
   is-arrayish@0.2.1: {}
 
