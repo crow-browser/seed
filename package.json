@@ -47,7 +47,7 @@
     "ini": "^3.0.0",
     "is-apple-silicon": "trickypr/is-apple-silicon",
     "kleur": "^4.1.5",
-    "modern-async": "^1.1.2",
+    "modern-async": "^2.0.0",
     "picomatch": "^4.0.2",
     "png-to-ico": "^2.1.4",
     "prompts": "^2.4.1",
