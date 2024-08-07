@@ -3,10 +3,19 @@ import { log } from "../log";
 import { dynamicConfig } from "../utils";
 
 export const set = (key: string, value?: string) => {
-  if (key == "version") {
-    console.log(
-      config.brands[dynamicConfig.get("brand")].release.displayVersion
+  const brandConfig = config.brands[dynamicConfig.get("brand")];
+
+  if (!brandConfig) {
+    log.error(
+      `The brand configuration for '${dynamicConfig.get(
+        "brand"
+      )}' is not defined. Please check your 'samurai.json' configuration.`
     );
+    return;
+  }
+
+  if (key == "version") {
+    console.log(brandConfig.release.displayVersion);
     return;
   }
 
