@@ -29,7 +29,9 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           cache: "pnpm"
       - name: 🚀 Install dependencies
-        run: pnpm install
+        run: |
+          pnpm config set registry https://npm.pkg.github.com/binary-blazer
+          pnpm install --auth-token=${ROBOT_TOKEN}
       - name: 🔑 Setup NPM token
         run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
         env:
