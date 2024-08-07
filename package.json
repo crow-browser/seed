@@ -41,7 +41,7 @@
     "async-icns": "^1.0.2",
     "axios": "^1.7.2",
     "cli-progress": "^3.9.1",
-    "commander": "^6.2.1",
+    "commander": "^12.1.0",
     "execa": "^9.3.0",
     "fs-extra": "^10.0.0",
     "ini": "^3.0.0",
