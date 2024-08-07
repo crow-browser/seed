@@ -1,11 +1,17 @@
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import prompts from 'prompts'
 import { colors } from './constants/colors'
 
 const formatToDoubleDigit = (r: number) =>
   r.toString().length == 1 ? `0${r}` : r
+
+const MAX_LOG_TYPE_LENGTH = 9; // Length of the longest log type (e.g., "SUCCESS") + 1
+
+const centerLogType = (type: string) => {
+  const padding = MAX_LOG_TYPE_LENGTH - type.length;
+  const padStart = Math.floor(padding / 2);
+  const padEnd = padding - padStart;
+  return ' '.repeat(padStart) + type + ' '.repeat(padEnd);
+};
 
 class Log {
   private startTime: number
@@ -44,50 +50,21 @@ class Log {
     return this._isDebug
   }
 
-  /**
-   * A version of info that only outputs when in debug mode.
-   *
-   * @param args The information you want to provide to the user
-   */
   debug(...arguments_: unknown[]): void {
     if (this.isDebug) console.debug(...arguments_)
   }
 
-  /**
-   * Provides information to the user. If you intend to provide debugging
-   * information that should be hidden unless verbose mode is enabled, use
-   * `debug` instead.
-   *
-   * @param args The information you want to provide to the user
-   */
   info(...arguments_: unknown[]): void {
-    console.info(colors.blue, this.getDiff(), ...arguments_, colors.reset)
+    console.info(`${colors.blue}[${colors.reset}${centerLogType('INFO')}${colors.blue}]${colors.reset} [${colors.blue}${this.getDiff()}${colors.reset}] ${arguments_}`)
   }
 
-  /**
-   * Provides text intended to be a warning to the user. If it is not critical,
-   * for example, something is missing, but probably doesn't matter, use `info`
-   * or even `debug` instead.
-   *
-   * @param args The information you want to provide to the user
-   */
   warning(...arguments_: unknown[]): void {
-    console.warn(colors.yellow, this.getDiff(), ...arguments_, colors.reset)
+    console.warn(`${colors.yellow}[${colors.reset}${centerLogType('WARNING')}${colors.yellow}]${colors.reset} [${colors.yellow}${this.getDiff()}${colors.reset}] ${arguments_}`)
   }
 
-  /**
-   * A warning that requires the user to take an action to continue, otherwise
-   * the process will exit.
-   *
-   * @param args The information you want to provide to the user
-   */
   async hardWarning(...arguments_: unknown[]): Promise<void> {
-    console.info(
-      colors.yellow,
-      this.getDiff(),
-      ...arguments_,
-      colors.reset,
-      '\n'
+    console.warn(
+      `${colors.yellow}[${colors.reset}${centerLogType('WARNING')}${colors.yellow}]${colors.reset} [${colors.yellow}${this.getDiff()}${colors.reset}] ${arguments_}`
     )
 
     const { answer } = await prompts({
@@ -99,21 +76,13 @@ class Log {
     if (!answer) process.exit(0)
   }
 
-  /**
-   * Outputs a success message to the console
-   *
-   * @param args The information you want to provide to the user
-   */
   success(...arguments_: unknown[]): void {
     console.log()
-    console.log(colors.green, this.getDiff(), ...arguments_, colors.reset)
+    console.log(
+      `${colors.green}[${colors.reset}${centerLogType('SUCCESS')}${colors.green}]${colors.reset} [${colors.green}${this.getDiff()}${colors.reset}] ${arguments_}`
+    )
   }
 
-  /**
-   * Throws an error based on the input
-   *
-   * @param args The error you want to throw or a type that you want to convert to an error
-   */
   error(...arguments_: (Error | unknown)[]): never {
     throw arguments_[0] instanceof Error
       ? arguments_[0]
@@ -124,11 +93,6 @@ class Log {
         )
   }
 
-  /**
-   * Asks for an error report to our issue tracker. Should be used in chases
-   * where we don't think an error will occur, but we want to know if it does
-   * to fix it
-   */
   askForReport(): void {
     console.info(
       'The following error is a bug. Please open an issue on the samurai issue structure with a link to your repository and the output from this command.'
@@ -138,31 +102,22 @@ class Log {
     )
   }
 
-  /**
-   * Outputs a success message to the console for the check command
-   *
-   * @param args The information you want to provide to the user
-   */
   checkSuccess(...arguments_: unknown[]): void {
-    console.log(colors.green, this.getDiff(), ...arguments_, colors.reset)
+    console.log(
+      `${colors.green}[${colors.reset}${centerLogType('SUCCESS')}${colors.green}]${colors.reset} [${colors.green}${this.getDiff()}${colors.reset}] ${arguments_}`
+    )
   }
 
-  /**
-   * Outputs a error message to the console for the check command
-   *
-   * @param args The information you want to provide to the user
-   */
   checkError(...arguments_: unknown[]): void {
-    console.log(colors.red, this.getDiff(), ...arguments_, colors.reset)
+    console.log(
+      `${colors.red}[${colors.reset}${centerLogType('ERROR')}${colors.red}]${colors.reset} [${colors.red}${this.getDiff()}${colors.reset}] ${arguments_}`
+    )
   }
 
-  /**
-   * Outputs a warning message to the console for the check command
-   *
-   * @param args The information you want to provide to the user
-   */
   checkWarning(...arguments_: unknown[]): void {
-    console.log(colors.yellow, this.getDiff(), ...arguments_, colors.reset)
+    console.log(
+      `${colors.yellow}[${colors.reset}${centerLogType('WARNING')}${colors.yellow}]${colors.reset} [${colors.yellow}${this.getDiff()}${colors.reset}] ${arguments_}`
+    )
   }
 }
 

@@ -1,7 +1,3 @@
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
 import { execSync } from 'node:child_process'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
@@ -53,7 +49,6 @@ const applyConfig = async (os: string) => {
 
   const templateOptions = {
     name: config.name,
-    vendor: config.name,
     appId: config.appId,
     brandingDir: existsSync(join(ENGINE_DIR, 'branding', 'samurai'))
       ? 'branding/samurai'
@@ -72,8 +67,6 @@ const applyConfig = async (os: string) => {
     templateOptions
   )
 
-  // Allow a custom config to be placed in /mozconfig. This will not be committed
-  // to origin
   let customConfig = existsSync(join(process.cwd(), 'mozconfig'))
     ? readFileSync(join(process.cwd(), 'mozconfig')).toString()
     : ''
@@ -104,8 +97,6 @@ const applyConfig = async (os: string) => {
       )
   })
 
-  // We need to install the browser display version inside of browser/config/version.txt
-  // and browser/config/version_display.txt
   const brandingConfig: BrandInfo | undefined = config.brands[brandingKey]
   const version = brandingConfig?.release?.displayVersion || '1.0.0'
 
@@ -153,7 +144,6 @@ const parseDate = (d: number) => {
 }
 
 const success = (date: number) => {
-  // mach handles the success messages
   console.log()
   log.info(`Total build time: ${parseDate(Date.now() - date)}.`)
 }
@@ -165,8 +155,6 @@ interface Options {
 
 export const build = async (options: Options): Promise<void> => {
   const d = Date.now()
-
-  // Host build
 
   const prettyHost = platform[process.platform]
 
