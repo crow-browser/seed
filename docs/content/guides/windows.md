@@ -10,8 +10,9 @@ The first thing you will need to do is install Microsoft's c++ build tools. You 
   - Desktop development with C++
 - **In the _Individual components_ tab**
   - MSVC v143 - VS 2022 C++ x64/x86 build tools.
-  - Windows 10 SDK (at least 10.0.19041.0).
+  - Windows 11 SDK (at least 10.0.22000.0) or Windows 10 SDK (at least 10.0.19041.0).
   - C++ ATL for v143 build tools (x86 and x64).
+  - Python 3.10 (or later) for v143 build tools (Microsoft Store version recommended)
 
 > **Note:**
 > If this guide ever gets out of date, you can get the latest build requirements from [Mozilla's docs](https://firefox-source-docs.mozilla.org/setup/windows_build.html#system-preparation)
