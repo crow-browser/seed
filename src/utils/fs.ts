@@ -8,11 +8,11 @@ import {
   openSync,
   rmSync,
   writeSync,
-} from "node:fs";
-import { mkdir, readdir, stat } from "node:fs/promises";
-import { join, isAbsolute } from "node:path";
+} from 'node:fs'
+import { mkdir, readdir, stat } from 'node:fs/promises'
+import { join, isAbsolute } from 'node:path'
 
-import { log } from "../log";
+import { log } from '../log'
 
 /**
  * On windows, converts a windows style path to a unix path. On unix, passes the
@@ -22,107 +22,107 @@ import { log } from "../log";
  * @returns A unix path
  */
 export const windowsPathToUnix = (path: string): string =>
-  process.platform == "win32" ? path.replace(/\\/g, "/") : path;
+  process.platform == 'win32' ? path.replace(/\\/g, '/') : path
 
 export async function walkDirectory(directory: string): Promise<string[]> {
-  const output = [];
+  const output = []
 
   if (!isAbsolute(directory)) {
-    log.askForReport();
-    log.error("Please provide an absolute input to walkDirectory");
+    log.askForReport()
+    log.error('Please provide an absolute input to walkDirectory')
   }
 
   try {
-    const directoryContents = await readdir(directory);
+    const directoryContents = await readdir(directory)
 
     for (const file of directoryContents) {
-      const fullPath = join(directory, file);
-      const fStat = await stat(fullPath);
+      const fullPath = join(directory, file)
+      const fStat = await stat(fullPath)
 
       if (fStat.isDirectory()) {
         for (const newFile of await walkDirectory(fullPath)) {
-          output.push(newFile);
+          output.push(newFile)
         }
       } else {
-        output.push(fullPath);
+        output.push(fullPath)
       }
     }
   } catch (error) {
-    log.askForReport();
-    log.error(error);
+    log.askForReport()
+    log.error(error)
   }
 
-  return output;
+  return output
 }
 
-export type TreeType = { [property: string]: string[] | TreeType };
+export type TreeType = { [property: string]: string[] | TreeType }
 
 export async function walkDirectoryTree(directory: string): Promise<TreeType> {
-  const output: TreeType = {};
+  const output: TreeType = {}
 
   if (!isAbsolute(directory)) {
-    log.askForReport();
-    log.error("Please provide an absolute input to walkDirectory");
+    log.askForReport()
+    log.error('Please provide an absolute input to walkDirectory')
   }
 
   try {
-    const directoryContents = await readdir(directory);
+    const directoryContents = await readdir(directory)
 
-    const currentOut = [];
+    const currentOut = []
 
     for (const file of directoryContents) {
-      const fullPath = join(directory, file);
-      const fStat = await stat(fullPath);
+      const fullPath = join(directory, file)
+      const fStat = await stat(fullPath)
 
       if (fStat.isDirectory()) {
-        output[file] = await walkDirectoryTree(fullPath);
+        output[file] = await walkDirectoryTree(fullPath)
       } else {
-        currentOut.push(fullPath);
+        currentOut.push(fullPath)
       }
     }
 
-    output["."] = currentOut;
+    output['.'] = currentOut
   } catch (error) {
-    log.askForReport();
-    log.error(error);
+    log.askForReport()
+    log.error(error)
   }
 
-  return output;
+  return output
 }
 
 export async function ensureDirectory(directory: string): Promise<void> {
   if (!existsSync(directory)) {
-    await mkdirp(directory);
+    await mkdirp(directory)
   }
 }
 
 export function mkdirp(directory: string): Promise<string | undefined> {
-  return mkdir(directory, { recursive: true });
+  return mkdir(directory, { recursive: true })
 }
 
 export function mkdirpSync(directory: string): string | undefined {
-  return mkdirSync(directory, { recursive: true });
+  return mkdirSync(directory, { recursive: true })
 }
 
 export function appendToFileSync(fileName: string, content: string): void {
-  const file = openSync(fileName, "a");
-  writeSync(file, content);
-  closeSync(file);
+  const file = openSync(fileName, 'a')
+  writeSync(file, content)
+  closeSync(file)
 }
 
 export function filesExist(files: string[]): boolean {
-  return files.every((file) => existsSync(file));
+  return files.every((file) => existsSync(file))
 }
 
 export function ensureEmpty(path: string) {
   if (existsSync(path)) {
-    rmSync(path, { recursive: true });
+    rmSync(path, { recursive: true })
   }
 
-  mkdirSync(path, { recursive: true });
+  mkdirSync(path, { recursive: true })
 }
 
 export async function getSize(path: string): Promise<number> {
-  const fileInfo = await stat(path);
-  return fileInfo.size;
+  const fileInfo = await stat(path)
+  return fileInfo.size
 }
