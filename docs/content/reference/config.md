@@ -303,6 +303,8 @@ Example:
 }
 ```
 
+Note: The `displayVersion` property in the `release` key is crucial for the proper functioning of the `samurai set brand` command. Ensure that it is correctly defined to avoid any errors.
+
 Commands:
 
 ```sh
