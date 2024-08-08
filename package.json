@@ -12,6 +12,7 @@
     "test:dev": "jest --watch",
     "build": "tsc",
     "build:win": "tsc && copy /y src\\commands\\license-check.txt dist\\commands\\license-check.txt",
+    "package:dev": "pnpm run build:win && npm i . -g",
     "format": "prettier . -w",
     "lint": "eslint .",
     "self": "cd testing && node ../dist/index.js"

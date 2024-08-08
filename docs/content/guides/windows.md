@@ -10,8 +10,9 @@ The first thing you will need to do is install Microsoft's c++ build tools. You 
   - Desktop development with C++
 - **In the _Individual components_ tab**
   - MSVC v143 - VS 2022 C++ x64/x86 build tools.
-  - Windows 10 SDK (at least 10.0.19041.0).
+  - Windows 11 SDK (at least 10.0.22000.0) or Windows 10 SDK (at least 10.0.19041.0).
   - C++ ATL for v143 build tools (x86 and x64).
+  - Python 3.10 (or later) for v143 build tools (Microsoft Store version recommended)
 
 > **Note:**
 > If this guide ever gets out of date, you can get the latest build requirements from [Mozilla's docs](https://firefox-source-docs.mozilla.org/setup/windows_build.html#system-preparation)
@@ -43,3 +44,24 @@ Note that you will also have to provide a path to nsis on your system. For mine 
 ```sh
 export MAKENSISU="C:\\Program Files (x86)\\NSIS\\Bin\\makensis.exe"
 ```
+
+## Troubleshooting Common Issues on Windows 11
+
+### Checking for the existence of the `mach` command
+
+If you encounter a `FileNotFoundError` related to the `mach` command while running `samurai bootstrap`, follow these steps:
+
+1. Ensure that the `mach` command is correctly installed.
+2. Verify that the `mach` command exists in the expected location: `<project_root>/.engine/mach`.
+3. If the `mach` command is not found, reinstall the necessary dependencies and try again.
+
+### Ensuring `samurai.json` is correctly configured
+
+If you encounter issues related to `brandConfig` being undefined while running `samurai set brand stable` or `samurai build`, follow these steps:
+
+1. Open your `samurai.json` configuration file.
+2. Ensure that the `brands` key is correctly defined and includes the necessary properties for your brand.
+3. Verify that the `release` key within the `brands` configuration includes the `displayVersion` property.
+4. If the `brandConfig` is still undefined, provide a default value or a clear error message in your configuration.
+
+By following these troubleshooting steps, you should be able to resolve common issues encountered while using Samurai on Windows 11.
