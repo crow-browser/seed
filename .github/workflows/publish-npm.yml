@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["lts/*"]
+        node: ['lts/*']
     steps:
       - name: 🧱 Checkout repository
         uses: actions/checkout@v4
@@ -26,8 +26,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          registry-url: "https://registry.npmjs.org"
-          cache: "pnpm"
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
       - name: 🚀 Install dependencies
         run: pnpm install
       - name: 🔑 Setup NPM token

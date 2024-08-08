@@ -2,29 +2,31 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import execa from "execa";
-import { PATCH_ARGS, ENGINE_DIR } from "../../constants";
-import { log } from "../../log";
-import { IMelonPatch } from "./command";
+import { PATCH_ARGS, ENGINE_DIR } from '../../constants'
+import { log } from '../../log'
+import { IMelonPatch } from './command'
+import { execSync } from 'node:child_process'
 
 export interface IGitPatch extends IMelonPatch {
-  path: string;
+  path: string
 }
 
 export async function apply(path: string): Promise<void> {
   try {
-    await execa("git", ["apply", "-R", ...PATCH_ARGS, path], {
+    execSync(`git apply -R ${PATCH_ARGS.join(' ')} ${path}`, {
       cwd: ENGINE_DIR,
-    });
+      stdio: 'inherit',
+    })
   } catch {
-    undefined;
+    undefined
   }
 
-  const { stdout, exitCode } = await execa(
-    "git",
-    ["apply", ...PATCH_ARGS, path],
-    { cwd: ENGINE_DIR }
-  );
-
-  if (exitCode != 0) log.error(stdout);
+  try {
+    execSync(`git apply ${PATCH_ARGS.join(' ')} ${path}`, {
+      cwd: ENGINE_DIR,
+      stdio: 'inherit',
+    })
+  } catch (error: any) {
+    log.error(error.message)
+  }
 }

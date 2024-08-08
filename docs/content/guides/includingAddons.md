@@ -39,14 +39,14 @@ You are going to want to open `.engine/browser/components/customizableui/Customi
 
 ```js
 const { makeWidgetId } = ChromeUtils.import(
-  "resource://gre/modules/ExtensionCommon.jsm"
-).ExtensionCommon;
+  'resource://gre/modules/ExtensionCommon.jsm'
+).ExtensionCommon
 ```
 
 Then, add a constant with the id of the addon at the top of the file, for example:
 
 ```js
-const kUBlockOriginID = "uBlock0@raymondhill.net";
+const kUBlockOriginID = 'uBlock0@raymondhill.net'
 ```
 
 Now, you can go down to the `navbarPlacements` array (around line 240) and add
@@ -59,21 +59,21 @@ To the array where you want the icon to appear, for example:
 
 ```js
 let navbarPlacements = [
-  "back-button",
-  "forward-button",
-  "stop-reload-button",
-  Services.policies.isAllowed("removeHomeButtonByDefault")
+  'back-button',
+  'forward-button',
+  'stop-reload-button',
+  Services.policies.isAllowed('removeHomeButtonByDefault')
     ? null
-    : "home-button",
-  "spring",
+    : 'home-button',
+  'spring',
   `${makeWidgetId(kUBlockOriginID)}-browser-action`,
-  "urlbar-container",
-  "spring",
-  "save-to-pocket-button",
-  "downloads-button",
-  AppConstants.MOZ_DEV_EDITION ? "developer-button" : null,
-  "fxa-toolbar-menu-button",
-].filter((name) => name);
+  'urlbar-container',
+  'spring',
+  'save-to-pocket-button',
+  'downloads-button',
+  AppConstants.MOZ_DEV_EDITION ? 'developer-button' : null,
+  'fxa-toolbar-menu-button',
+].filter((name) => name)
 ```
 
 Finally, export the changes you have made:

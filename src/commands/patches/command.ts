@@ -1,22 +1,22 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import { join } from "node:path";
-import { existsSync } from "node:fs";
-import glob from "tiny-glob";
+import { join } from 'node:path'
+import { existsSync } from 'node:fs'
+import glob from 'tiny-glob'
 
-import { ENGINE_DIR, PATCHES_DIR, SRC_DIR } from "../../constants";
-import * as gitPatch from "./git-patch";
-import * as copyPatch from "./copy-patches";
-import * as brandingPatch from "./branding-patch";
-import { patchCountFile } from "../../middleware/patch-check";
-import { checkHash } from "../../utils";
-import { Task, TaskList } from "../../utils/task-list";
-import { writeFile } from "node:fs/promises";
+import { ENGINE_DIR, PATCHES_DIR, SRC_DIR } from '../../constants'
+import * as gitPatch from './git-patch'
+import * as copyPatch from './copy-patches'
+import * as brandingPatch from './branding-patch'
+import { patchCountFile } from '../../middleware/patch-check'
+import { checkHash } from '../../utils'
+import { Task, TaskList } from '../../utils/task-list'
+import { writeFile } from 'node:fs/promises'
 
 export interface IMelonPatch {
-  name: string;
-  skip?: () => boolean | Promise<boolean>;
+  name: string
+  skip?: () => boolean | Promise<boolean>
 }
 
 function patchMethod<T extends IMelonPatch>(
@@ -35,80 +35,80 @@ function patchMethod<T extends IMelonPatch>(
           skip: patch.skip,
         }))
       ),
-  };
+  }
 }
 
 function importMelonPatches(): Task {
   return patchMethod(
-    "branding",
+    'branding',
     [
       ...(brandingPatch.get().map((name) => ({
-        type: "branding",
+        type: 'branding',
         name,
         value: name,
         skip: async () => {
           const logoCheck = checkHash(
-            join(brandingPatch.BRANDING_DIR, name, "logo.png")
-          );
+            join(brandingPatch.BRANDING_DIR, name, 'logo.png')
+          )
           const macosInstallerCheck = checkHash(
-            join(brandingPatch.BRANDING_DIR, name, "MacOSInstaller.svg")
-          );
+            join(brandingPatch.BRANDING_DIR, name, 'MacOSInstaller.svg')
+          )
 
           if (
             (await logoCheck) &&
             (await macosInstallerCheck) &&
-            existsSync(join(ENGINE_DIR, "browser/branding", name))
+            existsSync(join(ENGINE_DIR, 'browser/branding', name))
           ) {
-            return true;
+            return true
           }
 
-          return false;
+          return false
         },
       })) as brandingPatch.IBrandingPatch[]),
     ],
     async (patch) => await brandingPatch.apply(patch.value as string)
-  );
+  )
 }
 
 async function importFolders(): Promise<Task> {
   return patchMethod(
-    "folder",
+    'folder',
     await copyPatch.get(),
     async (patch) => await copyPatch.apply(patch.src)
-  );
+  )
 }
 
 async function importGitPatch(): Promise<Task> {
-  let patches = await glob("**/*.patch", {
+  let patches = await glob('**/*.patch', {
     filesOnly: true,
     cwd: SRC_DIR,
-  });
-  patches = patches.map((path) => join(SRC_DIR, path));
+  })
+  patches = patches.map((path) => join(SRC_DIR, path))
 
-  await writeFile(patchCountFile, patches.length.toString());
+  await writeFile(patchCountFile, patches.length.toString())
 
   return patchMethod<gitPatch.IGitPatch>(
-    "git",
+    'git',
     patches.map((path) => ({ name: path, path })),
     async (patch) => await gitPatch.apply(patch.path)
-  );
+  )
 }
 
 async function importInternalPatch(): Promise<Task> {
-  const patches = await glob("*.patch", {
+  const patches = await glob('*.patch', {
     filesOnly: true,
     cwd: PATCHES_DIR,
-  });
+  })
   const structuredPatches = patches.map((path) => ({
     name: path,
     path: join(PATCHES_DIR, path),
-  }));
+  }))
 
   return patchMethod<gitPatch.IGitPatch>(
-    "samurai",
+    'samurai',
     structuredPatches,
     async (patch) => await gitPatch.apply(patch.path)
-  );
+  )
 }
 
 export async function applyPatches(): Promise<void> {
@@ -117,5 +117,5 @@ export async function applyPatches(): Promise<void> {
     importMelonPatches(),
     await importFolders(),
     await importGitPatch(),
-  ]).run();
+  ]).run()
 }

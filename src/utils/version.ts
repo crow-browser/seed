@@ -1,9 +1,9 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import axios from "axios";
-import { log } from "../log";
-import { SupportedProducts } from "./config";
+import axios from 'axios'
+import { log } from '../log'
+import { SupportedProducts } from './config'
 
 const firefoxTargets = JSON.parse(`{
   "${SupportedProducts.Firefox}": "LATEST_FIREFOX_VERSION",
@@ -11,21 +11,21 @@ const firefoxTargets = JSON.parse(`{
   "${SupportedProducts.FirefoxDevelopment}": "FIREFOX_DEVEDITION",
   "${SupportedProducts.FirefoxESR}": "FIREFOX_ESR",
   "${SupportedProducts.FirefoxNightly}": "FIREFOX_NIGHTLY"
-}`);
+}`)
 
 export const getLatestFF = async (
   product: SupportedProducts = SupportedProducts.Firefox
 ): Promise<string> => {
   try {
     const { data } = await axios.get(
-      "https://product-details.mozilla.org/1.0/firefox_versions.json"
-    );
+      'https://product-details.mozilla.org/1.0/firefox_versions.json'
+    )
 
-    return data[firefoxTargets[product]];
+    return data[firefoxTargets[product]]
   } catch (error) {
-    log.warning("Failed to get latest firefox version with error:");
-    log.error(error);
+    log.warning('Failed to get latest firefox version with error:')
+    log.error(error)
 
-    return "";
+    return ''
   }
-};
+}
