@@ -14,6 +14,15 @@ export const set = (key: string, value?: string) => {
     return
   }
 
+  if (!brandConfig.release) {
+    log.error(
+      `The release configuration for '${dynamicConfig.get(
+        'brand'
+      )}' is not defined. Please check your 'samurai.json' configuration.`
+    )
+    return
+  }
+
   if (key == 'version') {
     console.log(brandConfig.release.displayVersion)
     return
