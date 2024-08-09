@@ -41,6 +41,19 @@ const programVersions = []
 
 for (const brand in config.brands) {
   const brandConfig = config.brands[brand]
+
+  if (!brandConfig.release) {
+    if (!brandConfig.release) {
+    log.error(
+      `The release configuration for '${dynamicConfig.get(
+        'brand'
+      )}' is not defined. Please check your 'samurai.json' configuration.`
+    )
+    return
+  }
+  return process.exit(0);
+  };
+  
   programVersions.push({
     name: brandConfig.brandFullName,
     value: brandConfig.release.displayVersion,
