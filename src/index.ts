@@ -47,8 +47,8 @@ for (const brand in config.brands) {
       `The release configuration for '${dynamicConfig.get(
         'brand'
       )}' is not defined. Please check your 'samurai.json' configuration.`
-    )
-    return
+    }
+    process.exit(0);
   }
 
   programVersions.push({
