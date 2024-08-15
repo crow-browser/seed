@@ -7,7 +7,7 @@ import commander, { Command } from 'commander'
 import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
-import { errorHandler, config as configInited, versionFormatter } from './utils'
+import { errorHandler, config as configInited, versionFormatter, dynamicConfig } from './utils'
 import { commands } from './cmds'
 import { BIN_NAME, ENGINE_DIR } from './constants'
 import { updateCheck } from './middleware/update-check'
@@ -43,7 +43,6 @@ for (const brand in config.brands) {
   const brandConfig = config.brands[brand]
 
   if (!brandConfig.release) {
-    if (!brandConfig.release) {
     log.error(
       `The release configuration for '${dynamicConfig.get(
         'brand'
@@ -51,9 +50,7 @@ for (const brand in config.brands) {
     )
     return
   }
-  return process.exit(0);
-  };
-  
+
   programVersions.push({
     name: brandConfig.brandFullName,
     value: brandConfig.release.displayVersion,
