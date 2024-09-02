@@ -8,12 +8,12 @@ site/
 tests/
 
 .prettierrc.json
-samurai.json
+seed.config.json
 tsconfig.json
 pnpm-lock.yaml
 .eslintignore
 .eslintrc.json
-.samurai
+.seed
 .vscode/
 .github/
 .eslintrc.js

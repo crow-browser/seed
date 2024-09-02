@@ -60,7 +60,7 @@ export async function resolveAddonDownloadUrl(
           `https://api.github.com/repos/${addon.repo}/releases/tags/${addon.version}`,
           {
             headers: {
-              'User-Agent': 'samurai-build -> addon downloader',
+              'User-Agent': 'seed-build -> addon downloader',
             },
           }
         )

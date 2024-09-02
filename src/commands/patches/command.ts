@@ -105,7 +105,7 @@ async function importInternalPatch(): Promise<Task> {
   }))
 
   return patchMethod<gitPatch.IGitPatch>(
-    'samurai',
+    'seed',
     structuredPatches,
     async (patch) => await gitPatch.apply(patch.path)
   )

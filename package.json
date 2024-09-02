@@ -1,11 +1,11 @@
 {
-  "name": "@praxive/samurai",
-  "version": "1.5.0",
+  "name": "@crow-browser/seed",
+  "version": "0.1",
   "description": "Build Firefox-based browsers with ease",
   "main": "index.js",
   "reveal": true,
   "bin": {
-    "samurai": "./dist/index.js"
+    "seed": "./dist/index.js"
   },
   "scripts": {
     "test": "jest",
@@ -19,25 +19,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PraxiveSoftware/samurai.git"
+    "url": "git+https://github.com/crow-browser/seed.git"
   },
   "keywords": [
-    "samurai",
-    "gluon",
-    "melon",
+    "seed",
+    "crow-browser",
     "firefox",
     "firefox-fork",
     "build-tool"
   ],
   "authors": [
-    "binary-blazer",
-    "TrickyPR"
+    "damie824"
   ],
   "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/PraxiveSoftware/samurai/issues"
+    "url": "https://github.com/crow-browser/seed/issues"
   },
-  "homepage": "https://github.com/PraxiveSoftware/samurai#readme",
+  "homepage": "https://github.com/crow-browser/seed/samurai#readme",
   "dependencies": {
     "async-icns": "^1.0.2",
     "axios": "^1.7.2",

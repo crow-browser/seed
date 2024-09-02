@@ -9,7 +9,7 @@ export const set = (key: string, value?: string) => {
     log.error(
       `The brand configuration for '${dynamicConfig.get(
         'brand'
-      )}' is not defined. Please check your 'samurai.json' configuration.`
+      )}' is not defined. Please check your 'seed.config.json' configuration.`
     )
     return
   }
@@ -18,7 +18,7 @@ export const set = (key: string, value?: string) => {
     log.error(
       `The release configuration for '${dynamicConfig.get(
         'brand'
-      )}' is not defined. Please check your 'samurai.json' configuration.`
+      )}' is not defined. Please check your 'seed.config.json' configuration.`
     )
     return
   }

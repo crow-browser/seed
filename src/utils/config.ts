@@ -12,7 +12,7 @@ import { BIN_NAME } from '../constants'
 import { log } from '../log'
 
 export const projectDirectory = process.cwd()
-export const configPath = join(projectDirectory, 'samurai.json')
+export const configPath = join(projectDirectory, 'seed.config.json')
 
 let hasWarnedAboutConfig = false
 
@@ -158,7 +158,7 @@ export const defaultLicenseConfig: LicenseConfig = {
 }
 
 export const defaultConfig: Config = {
-  name: 'Unknown samurai build',
+  name: 'Unknown seed build',
   vendor: 'Unknown',
   appId: 'unknown.appid',
   binaryName: 'firefox',
@@ -197,7 +197,7 @@ export function rawConfig(): string {
   } else {
     if (!hasWarnedAboutConfig) {
       log.warning(
-        `Config file not found at ${configPath}. It is recommended to create one by running |samurai setup-project|`
+        `Config file not found at ${configPath}. It is recommended to create one by running |seed setup-project|`
       )
       hasWarnedAboutConfig = true
     }

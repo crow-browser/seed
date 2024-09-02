@@ -6,7 +6,7 @@ import { existsSync, mkdirSync, readdirSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { log } from '../log'
 
-export const BIN_NAME = 'samurai'
+export const BIN_NAME = 'seed'
 
 export const BUILD_TARGETS = ['linux', 'windows', 'macos']
 export const ARCHITECTURE = ['i686', 'x86_64']
@@ -29,7 +29,7 @@ export const PATCHES_DIR = resolve(
 )
 export const COMMON_DIR = resolve(process.cwd(), 'common')
 export const CONFIGS_DIR = resolve(process.cwd(), 'configs')
-export const MELON_DIR = resolve(process.cwd(), '.samurai')
+export const MELON_DIR = resolve(process.cwd(), '.seed')
 export const MELON_TMP_DIR = resolve(MELON_DIR, 'engine')
 export const DIST_DIR = resolve(process.cwd(), 'dist')
 
@@ -80,30 +80,30 @@ export let BASH_PATH: string | undefined
 
 // All windows specific code should be located inside of this if statement
 if (process.platform == 'win32') {
-  (async () => {
-    const gitPath = execSync('where.exe git.exe').toString();
+  ;(async () => {
+    const gitPath = execSync('where.exe git.exe').toString()
 
     if (gitPath.includes('git.exe')) {
       // Git is installed on the computer, the bash terminal is probably located
       // somewhere nearby
-      log.debug('Fount git at ' + gitPath);
+      log.debug('Fount git at ' + gitPath)
 
-      log.debug(`Searching for bash`);
-      BASH_PATH = resolve(gitPath, '../..', 'bin/bash.exe');
+      log.debug(`Searching for bash`)
+      BASH_PATH = resolve(gitPath, '../..', 'bin/bash.exe')
       if (!existsSync(BASH_PATH)) {
-        log.debug(`Could not find bash at ${BASH_PATH}`);
+        log.debug(`Could not find bash at ${BASH_PATH}`)
 
-        BASH_PATH = execSync('where.exe bash.exe').toString();
+        BASH_PATH = execSync('where.exe bash.exe').toString()
         if (BASH_PATH && !BASH_PATH.includes('bash.exe')) {
-          log.error('Could not find bash, aborting');
+          log.error('Could not find bash, aborting')
         }
       }
 
-      log.debug(`Found bash at ${BASH_PATH}`);
+      log.debug(`Found bash at ${BASH_PATH}`)
     } else {
       log.error(
         "Git doesn't appear to be installed on this computer. Please install it before continuing"
-      );
+      )
     }
-  })();
+  })()
 }

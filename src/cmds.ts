@@ -9,7 +9,7 @@ import { Cmd } from './types'
 export const commands: Cmd[] = [
   {
     cmd: 'bootstrap',
-    description: 'Bootstrap the samurai app.',
+    description: 'Bootstrap the seed app.',
     requestController: async () =>
       (await import('./commands/bootstrap')).bootstrap,
   },
@@ -17,7 +17,7 @@ export const commands: Cmd[] = [
     cmd: 'build',
     aliases: ['b'],
     description:
-      'Build the samurai app. Specify the OS param for cross-platform builds.',
+      'Build the seed app. Specify the OS param for cross-platform builds.',
     options: [
       {
         arg: '--u, --ui',
@@ -163,7 +163,7 @@ export const commands: Cmd[] = [
   },
   {
     cmd: 'setup-project',
-    description: 'Sets up a samurai project for the first time',
+    description: 'Sets up a seed project for the first time',
     requestController: async () =>
       (await import('./commands/setup-project')).setupProject,
   },

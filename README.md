@@ -1,15 +1,14 @@
 <div align="center">
 
 <p align="center">
-  <img width="98" src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Dragon/3D/dragon_3d.png"/>
+  <img width="98" src="https://raw.githubusercontent.com/crow-browser/assets/main/seed/logo.png"/>
 </p>
 
-# Samurai
+# Seed
 
-Build Firefox-based browsers with ease
+Build your own Firefox-based browsers with ease
 
-**This is still in a prerelease / prototype phase. Changes will be made, things will be broken**<br />
-**Fork of the [gluon](https://github.com/pulse-browser/gluon) project**
+**This is still in a prerelease / prototype phase. Changes will be made, things will be broken**
 
 </div>
 
@@ -41,6 +40,10 @@ Documentation is available on [praxivesoftware.github.io/samurai](https://praxiv
 
 The following is included in good faith. The writer is not a lawyer, and this is not legal advice.
 
+### Samurai
+
+Seed is a distribution of [samurai](https://github.com/praxivesoftware/samurai). It is licensed under MPL v2.0. The original license is included in the LICENSE file.
+
 ### Gluon
 
 Samurai is a fork of [Gluon](https://github.com/pulse-browser/gluon), which is licensed under MPL v2.0. The original license is included in the LICENSE file.
@@ -56,10 +59,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ### Firefox
 
 This program downloads and modifies Firefox. [Follow their license](https://hg.mozilla.org/mozilla-central/file/tip/LICENSE) when distributing your program.
-
-### Logo
-
-The package icon is from [Microsoft's Fluent Emoji](https://github.com/microsoft/fluentui-emoji). There is an [ongoing conversation](https://github.com/microsoft/fluentui-emoji/issues/18) regarding the license.
 
 ```
 MIT License

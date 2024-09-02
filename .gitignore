@@ -103,7 +103,7 @@ testing/
 site/
 
 docs/public/
-.samurai
+.seed
 
 # Patch generation
 .moz-central

@@ -7,7 +7,12 @@ import commander, { Command } from 'commander'
 import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
-import { errorHandler, config as configInited, versionFormatter, dynamicConfig } from './utils'
+import {
+  errorHandler,
+  config as configInited,
+  versionFormatter,
+  dynamicConfig,
+} from './utils'
 import { commands } from './cmds'
 import { BIN_NAME, ENGINE_DIR } from './constants'
 import { updateCheck } from './middleware/update-check'
@@ -17,7 +22,7 @@ import { log } from './log'
 // We have to use a dynamic require here, otherwise the typescript compiler
 // mucks up the directory structure
 // eslint-disable-next-line @typescript-eslint/no-var-requires, unicorn/prefer-module
-const { version: gluonVersion } = require('../package.json')
+import { version as seedVersion } from '../package.json'
 
 export const config = configInited
 
@@ -46,9 +51,9 @@ for (const brand in config.brands) {
     log.error(
       `The release configuration for '${dynamicConfig.get(
         'brand'
-      )}' is not defined. Please check your 'samurai.json' configuration.`
-    }
-    process.exit(0);
+      )}' is not defined. Please check your 'seed.config.json' configuration.`
+    )
+    process.exit(0)
   }
 
   programVersions.push({
@@ -70,7 +75,7 @@ program
           reportedFFVersion ? `(being reported as ${reportedFFVersion})` : ''
         }`,
       },
-      { name: 'Samurai', value: gluonVersion },
+      { name: 'Seed', value: seedVersion },
       reportedFFVersion
         ? `Mismatch detected between expected Firefox version and the actual version.\nYou may have downloaded the source code using a different version and\nthen switched to another branch.`
         : '',

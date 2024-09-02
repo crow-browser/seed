@@ -4,14 +4,14 @@ import { colors } from './constants/colors'
 const formatToDoubleDigit = (r: number) =>
   r.toString().length == 1 ? `0${r}` : r
 
-const MAX_LOG_TYPE_LENGTH = 9; // Length of the longest log type (e.g., "SUCCESS") + 1
+const MAX_LOG_TYPE_LENGTH = 9 // Length of the longest log type (e.g., "SUCCESS") + 1
 
 const centerLogType = (type: string) => {
-  const padding = MAX_LOG_TYPE_LENGTH - type.length;
-  const padStart = Math.floor(padding / 2);
-  const padEnd = padding - padStart;
-  return ' '.repeat(padStart) + type + ' '.repeat(padEnd);
-};
+  const padding = MAX_LOG_TYPE_LENGTH - type.length
+  const padStart = Math.floor(padding / 2)
+  const padEnd = padding - padStart
+  return ' '.repeat(padStart) + type + ' '.repeat(padEnd)
+}
 
 class Log {
   private startTime: number
@@ -55,11 +55,15 @@ class Log {
   }
 
   info(...arguments_: unknown[]): void {
-    console.info(`${colors.blue}[${colors.reset}${centerLogType('INFO')}${colors.blue}]${colors.reset} [${colors.blue}${this.getDiff()}${colors.reset}] ${arguments_}`)
+    console.info(
+      `${colors.blue}[${colors.reset}${centerLogType('INFO')}${colors.blue}]${colors.reset} [${colors.blue}${this.getDiff()}${colors.reset}] ${arguments_}`
+    )
   }
 
   warning(...arguments_: unknown[]): void {
-    console.warn(`${colors.yellow}[${colors.reset}${centerLogType('WARNING')}${colors.yellow}]${colors.reset} [${colors.yellow}${this.getDiff()}${colors.reset}] ${arguments_}`)
+    console.warn(
+      `${colors.yellow}[${colors.reset}${centerLogType('WARNING')}${colors.yellow}]${colors.reset} [${colors.yellow}${this.getDiff()}${colors.reset}] ${arguments_}`
+    )
   }
 
   async hardWarning(...arguments_: unknown[]): Promise<void> {
@@ -95,10 +99,10 @@ class Log {
 
   askForReport(): void {
     console.info(
-      'The following error is a bug. Please open an issue on the samurai issue structure with a link to your repository and the output from this command.'
+      'The following error is a bug. Please open an issue on the seed issue structure with a link to your repository and the output from this command.'
     )
     console.info(
-      'The samurai issue tracker is located at: https://github.com/PraxiveSoftware/samurai/issues'
+      'The seed issue tracker is located at: https://github.com/crow-browser/seed/issues'
     )
   }
 

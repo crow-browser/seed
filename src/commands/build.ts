@@ -36,7 +36,7 @@ const applyConfig = async (os: string) => {
     changeset = stdout.trim()
   } catch (error) {
     log.warning(
-      'Samurai expects that you are building your browser with git as your version control'
+      'Seed expects that you are building your browser with git as your version control'
     )
     log.warning(
       'If you are using some other version control system, please migrate to git'
@@ -50,8 +50,8 @@ const applyConfig = async (os: string) => {
   const templateOptions = {
     name: config.name,
     appId: config.appId,
-    brandingDir: existsSync(join(ENGINE_DIR, 'branding', 'samurai'))
-      ? 'branding/samurai'
+    brandingDir: existsSync(join(ENGINE_DIR, 'branding', 'seed'))
+      ? 'branding/seed'
       : 'branding/unofficial',
     binName: config.binaryName,
     changeset,
