@@ -4,7 +4,7 @@
   "main": "index.js",
   "reveal": true,
   "bin": {
-    "seed": "dist/index.js"
+    "seed": "./dist/index.js"
   },
   "scripts": {
     "test": "jest",
@@ -78,7 +78,7 @@
     "ts-jest": "^27.1.5",
     "typescript": "^4.9.5"
   },
-  "version": "1.0.0",
+  "version": "1.0.2",
   "directories": {
     "test": "tests"
   },
