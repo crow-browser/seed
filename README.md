@@ -14,20 +14,21 @@ Build your own Firefox-based browsers with ease
 
 ## Installation
 
-Per project (recommended):
+**This project is prototype. so you must download this package via github.**
+per project (recommended):
 
 ```sh
-npm install @praxive/samurai
+npm install https://github.com/crow-browser/seed
 # or
-yarn add @praxive/samurai
+yarn add https://github.com/crow-browser/seed
 ```
 
 Globally:
 
 ```sh
-npm install -g @praxive/samurai
+npm install -g https://github.com/crow-browser/seed
 # or
-yarn global add @praxive/samurai
+yarn global add https://github.com/crow-browser/seed
 
 # Note: Linux and mac users may have to run the above command with sudo
 ```
