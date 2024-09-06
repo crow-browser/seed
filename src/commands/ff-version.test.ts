@@ -3,6 +3,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import * as config from '../utils/config'
 import { getFFVersion } from './ff-version'
+import { describe, it, expect, jest } from '@jest/globals'
 
 describe('getFFVersion', () => {
   it('Returns not specified with an empty config', () => {

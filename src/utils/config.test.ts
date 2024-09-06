@@ -10,6 +10,8 @@ import {
   rawConfig,
 } from './config'
 
+import { describe, it, expect, beforeAll, afterAll } from '@jest/globals'
+
 export function preserveExistingConfig(): void {
   let configExists = false
   let configContents = ''

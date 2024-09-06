@@ -2,9 +2,14 @@
   "name": "@crow-browser/seed",
   "description": "Build Firefox-based browsers with ease",
   "main": "index.js",
+  "version": "1.0.7",
+  "directories": {
+    "test": "tests"
+  },
+  "author": "crow project",
   "reveal": true,
   "bin": {
-    "seed": "./dist/index.js"
+    "seed": "./dist/src/index.js"
   },
   "scripts": {
     "test": "jest",
@@ -36,6 +41,7 @@
   },
   "homepage": "https://github.com/crow-browser/seed/samurai#readme",
   "dependencies": {
+    "@jest/globals": "^29.7.0",
     "async-icns": "^1.0.2",
     "axios": "^1.7.7",
     "cli-progress": "^3.12.0",
@@ -77,10 +83,5 @@
     "rimraf": "^6.0.1",
     "ts-jest": "^27.1.5",
     "typescript": "^4.9.5"
-  },
-  "version": "1.0.2",
-  "directories": {
-    "test": "tests"
-  },
-  "author": "crow project"
+  }
 }

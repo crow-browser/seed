@@ -4,6 +4,7 @@
 
 import { validProducts } from './config'
 import { getLatestFF } from './version'
+import { describe, it, expect } from '@jest/globals'
 
 const firefoxVersions = validProducts
 

@@ -1,4 +1,5 @@
 import { shouldSkipOptionalCopy } from './setup-project'
+import { describe, it, expect } from '@jest/globals'
 
 describe('shouldSkipOptionalCopy', () => {
   it('Returns true if the file is not optional', () => {

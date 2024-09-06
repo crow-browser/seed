@@ -177,7 +177,7 @@ export async function setupProject(): Promise<void> {
 // Filesystem templating
 
 // eslint-disable-next-line unicorn/prefer-module
-export const templateDirectory = join(__dirname, '../..', 'template')
+export const templateDirectory = join(__dirname, '../../..', 'template')
 
 /**
  * Copy files from the template directory that have .optional in their path,

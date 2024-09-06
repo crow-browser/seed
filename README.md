@@ -18,17 +18,17 @@ Build your own Firefox-based browsers with ease
 per project (recommended):
 
 ```sh
-npm install https://github.com/crow-browser/seed
+npm install @crow-browser/seed
 # or
-yarn add https://github.com/crow-browser/seed
+yarn add @crow-browser/seed
 ```
 
 Globally:
 
 ```sh
-npm install -g https://github.com/crow-browser/seed
+npm install -g @crow-browser/seed
 # or
-yarn global add https://github.com/crow-browser/seed
+yarn global add @crow-browser/seed
 
 # Note: Linux and mac users may have to run the above command with sudo
 ```

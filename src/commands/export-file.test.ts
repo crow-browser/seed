@@ -2,6 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import { getPatchName } from './export-file'
+import { describe, it, expect } from '@jest/globals'
 
 describe('getPatchName', () => {
   it('works on root files', () => {

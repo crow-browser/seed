@@ -4,6 +4,7 @@
 
 import * as dynamicConfig from './dynamic-config'
 import { readItem, removeItem } from './store'
+import { describe, it, expect } from '@jest/globals'
 
 describe('set', () => {
   it('runs without errors', () => dynamicConfig.set('brand', 'test'))

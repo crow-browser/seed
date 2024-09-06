@@ -3,12 +3,10 @@ node_modules/
 src/
 !template/src/
 !dist/
-docs/
-site/
 tests/
 
 .prettierrc.json
-seed.config.json
+seed.json
 tsconfig.json
 pnpm-lock.yaml
 .eslintignore

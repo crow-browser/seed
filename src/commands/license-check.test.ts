@@ -4,6 +4,7 @@
 
 import { join } from 'node:path'
 import { isValidLicense } from './license-check'
+import { describe, it, expect } from '@jest/globals'
 
 describe('isValidLicense', () => {
   it('Returns true if the file contains a valid license', async () => {
