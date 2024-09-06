@@ -14,13 +14,16 @@ Build your own Firefox-based browsers with ease
 
 ## Installation
 
-**This project is prototype. so you must download this package via github.**
+You can download seed via npm.
+
 per project (recommended):
 
 ```sh
 npm install @crow-browser/seed
 # or
 yarn add @crow-browser/seed
+#or (recommended)
+pnpm install @crow-browser/seed
 ```
 
 Globally:
@@ -29,13 +32,15 @@ Globally:
 npm install -g @crow-browser/seed
 # or
 yarn global add @crow-browser/seed
+#or (recommended)
+pnpm install -g @crow-browser/seed
 
 # Note: Linux and mac users may have to run the above command with sudo
 ```
 
 ## Documentation
 
-Documentation is available on [praxivesoftware.github.io/samurai](https://praxive.gitbook.io/samurai) or in the docs folder of this repository.
+Documentation is available on [our webpage](https://seed.damie.works/docs) or in the docs folder of this repository.
 
 ## Licencing notes
 
