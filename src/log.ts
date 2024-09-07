@@ -4,72 +4,52 @@ import { colors } from './constants/colors'
 const formatToDoubleDigit = (r: number) =>
   r.toString().length == 1 ? `0${r}` : r
 
-const MAX_LOG_TYPE_LENGTH = 9 // Length of the longest log type (e.g., "SUCCESS") + 1
-
-const centerLogType = (type: string) => {
-  const padding = MAX_LOG_TYPE_LENGTH - type.length
-  const padStart = Math.floor(padding / 2)
-  const padEnd = padding - padStart
-  return ' '.repeat(padStart) + type + ' '.repeat(padEnd)
+const getPadding = (str: string) => {
+  return `${str}${' '.repeat(8 - str.length)}`
 }
+
+const MAX_LOG_TYPE_LENGTH = 8 // Length of the longest log type (e.g., "SUCCESS") + 1
 
 class Log {
   private startTime: number
-
-  _isDebug = false
+  private _isDebug = false
 
   constructor() {
-    const d = new Date()
-
-    this.startTime = d.getTime()
+    this.startTime = new Date().getTime()
   }
 
-  getDiff(): string {
-    const d = new Date()
-
-    const currentTime = d.getTime()
-
-    const elapsedTime = currentTime - this.startTime
-
-    const secs = Math.floor((elapsedTime / 1000) % 60)
-    const mins = Math.floor((elapsedTime / (60 * 1000)) % 60)
-    const hours = Math.floor((elapsedTime / (60 * 60 * 1000)) % 24)
-
-    return `${formatToDoubleDigit(hours)}:${formatToDoubleDigit(
-      mins
-    )}:${formatToDoubleDigit(secs)}`
+  private getDate(): string {
+    return new Date().toLocaleString()
   }
 
   set isDebug(value: boolean) {
-    log.debug(`Logger debug mode has been ${value ? 'enabled' : 'disabled'}`)
+    this.debug(`Logger debug mode has been ${value ? 'enabled' : 'disabled'}`)
     this._isDebug = value
-    log.debug(`Logger debug mode has been ${value ? 'enabled' : 'disabled'}`)
+    this.debug(`Logger debug mode has been ${value ? 'enabled' : 'disabled'}`)
   }
 
   get isDebug() {
     return this._isDebug
   }
 
-  debug(...arguments_: unknown[]): void {
-    if (this.isDebug) console.debug(...arguments_)
+  debug(...args: unknown[]): void {
+    if (this.isDebug) console.debug(...args)
   }
 
-  info(...arguments_: unknown[]): void {
+  info(...args: unknown[]): void {
     console.info(
-      `${colors.blue}[${colors.reset}${centerLogType('INFO')}${colors.blue}]${colors.reset} [${colors.blue}${this.getDiff()}${colors.reset}] ${arguments_}`
+      `${colors.blue}[ Seed ] - ${colors.reset}${this.getDate()} ${colors.blue} ${getPadding('LOG')} ${colors.reset}${args}`
     )
   }
 
-  warning(...arguments_: unknown[]): void {
+  warning(...args: unknown[]): void {
     console.warn(
-      `${colors.yellow}[${colors.reset}${centerLogType('WARNING')}${colors.yellow}]${colors.reset} [${colors.yellow}${this.getDiff()}${colors.reset}] ${arguments_}`
+      `${colors.blue}[ Seed ] - ${colors.reset}${this.getDate()} ${colors.yellow} ${getPadding('WARNING')} ${colors.reset}${args}`
     )
   }
 
-  async hardWarning(...arguments_: unknown[]): Promise<void> {
-    console.warn(
-      `${colors.yellow}[${colors.reset}${centerLogType('WARNING')}${colors.yellow}]${colors.reset} [${colors.yellow}${this.getDiff()}${colors.reset}] ${arguments_}`
-    )
+  async hardWarning(...args: unknown[]): Promise<void> {
+    this.warning(...args)
 
     const { answer } = await prompts({
       type: 'confirm',
@@ -80,18 +60,18 @@ class Log {
     if (!answer) process.exit(0)
   }
 
-  success(...arguments_: unknown[]): void {
+  success(...args: unknown[]): void {
     console.log()
     console.log(
-      `${colors.green}[${colors.reset}${centerLogType('SUCCESS')}${colors.green}]${colors.reset} [${colors.green}${this.getDiff()}${colors.reset}] ${arguments_}`
+      `${colors.blue}[ Seed ] - ${colors.reset}${this.getDate()} ${colors.green} ${getPadding('SUCCESS')} ${colors.reset}${args}`
     )
   }
 
-  error(...arguments_: (Error | unknown)[]): never {
-    throw arguments_[0] instanceof Error
-      ? arguments_[0]
+  error(...args: (Error | unknown)[]): never {
+    throw args[0] instanceof Error
+      ? args[0]
       : new Error(
-          ...arguments_.map((a) =>
+          ...args.map((a) =>
             typeof a !== 'undefined' ? (a as object).toString() : a
           )
         )
@@ -106,22 +86,18 @@ class Log {
     )
   }
 
-  checkSuccess(...arguments_: unknown[]): void {
+  checkSuccess(...args: unknown[]): void {
+    this.success(...args)
+  }
+
+  checkError(...args: unknown[]): void {
     console.log(
-      `${colors.green}[${colors.reset}${centerLogType('SUCCESS')}${colors.green}]${colors.reset} [${colors.green}${this.getDiff()}${colors.reset}] ${arguments_}`
+      `${colors.blue}[ Seed ] - ${colors.reset}${this.getDate()} ${colors.red} ${getPadding('ERROR')} ${colors.reset}${args}`
     )
   }
 
-  checkError(...arguments_: unknown[]): void {
-    console.log(
-      `${colors.red}[${colors.reset}${centerLogType('ERROR')}${colors.red}]${colors.reset} [${colors.red}${this.getDiff()}${colors.reset}] ${arguments_}`
-    )
-  }
-
-  checkWarning(...arguments_: unknown[]): void {
-    console.log(
-      `${colors.yellow}[${colors.reset}${centerLogType('WARNING')}${colors.yellow}]${colors.reset} [${colors.yellow}${this.getDiff()}${colors.reset}] ${arguments_}`
-    )
+  checkWarning(...args: unknown[]): void {
+    this.warning(...args)
   }
 }
 
