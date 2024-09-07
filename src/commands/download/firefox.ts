@@ -224,6 +224,7 @@ export async function downloadInternals({
     await setupFirefoxSource(version)
   }
 
+  log.info('Starting initialize addons..')
   for (const addon of getAddons()) {
     const downloadUrl = await resolveAddonDownloadUrl(addon)
     const downloadedXPI = await downloadAddon(downloadUrl, addon)

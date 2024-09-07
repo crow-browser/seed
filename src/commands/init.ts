@@ -7,6 +7,7 @@ import { resolve } from 'node:path'
 import { bin_name } from '..'
 import { log } from '../log'
 import { config, configDispatch } from '../utils'
+import { platform } from 'node:os'
 
 export const init = async (directory: Command | string): Promise<void> => {
   const cwd = process.cwd()
@@ -53,6 +54,26 @@ export const init = async (directory: Command | string): Promise<void> => {
   })
 
   await configDispatch('git', {
+    args: ['config', 'core.autocrlf', 'false'],
+    cwd: absoluteInitDirectory,
+    shell: shell,
+  })
+
+  if (shell === 'bash') {
+    await configDispatch('git', {
+      args: ['config', 'core.eol', 'lf'],
+      cwd: absoluteInitDirectory,
+      shell: shell,
+    })
+  } else {
+    await configDispatch('git', {
+      args: ['config', 'core.eol', 'crlf'],
+      cwd: absoluteInitDirectory,
+      shell: shell,
+    })
+  }
+
+  await configDispatch('git', {
     args: ['add', '-f', '.'],
     cwd: absoluteInitDirectory,
     shell: shell,
@@ -61,7 +82,7 @@ export const init = async (directory: Command | string): Promise<void> => {
   log.info('Committing...')
 
   await configDispatch('git', {
-    args: ['commit', '-aqm', `"Firefox ${version}"`],
+    args: ['commit', '-aqm', 'Firefox initialized by seed'],
     cwd: absoluteInitDirectory,
     shell: shell,
   })

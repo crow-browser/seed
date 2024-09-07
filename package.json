@@ -2,7 +2,7 @@
   "name": "@crow-browser/seed",
   "description": "Build Firefox-based browsers with ease",
   "main": "index.js",
-  "version": "1.0.8",
+  "version": "1.0.17",
   "directories": {
     "test": "tests"
   },
