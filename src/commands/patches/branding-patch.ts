@@ -169,7 +169,7 @@ async function setupLocale(
   }
 ) {
   for (const file of await walkDirectory(
-    join(templateDirectory, 'branding.optional')
+    join(templateDirectory, './branding.optional')
   )) {
     const fileContents = await readFile(windowsPathToUnix(file), {
       encoding: 'utf8',

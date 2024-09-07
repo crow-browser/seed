@@ -23,7 +23,7 @@ export const SRC_DIR = resolve(process.cwd(), 'src')
 // eslint-disable-next-line unicorn/prefer-module
 export const PATCHES_DIR = resolve(
   __dirname,
-  '../..',
+  '../../..',
   'template',
   'patches.optional'
 )
