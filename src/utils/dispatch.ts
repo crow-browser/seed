@@ -1,6 +1,7 @@
 import { BASH_PATH } from '../constants'
 import { log } from '../log'
 import { exec } from 'node:child_process'
+import { Spinner } from 'cli-spinner'
 
 export const removeTimestamp = (input: string): string =>
   input.replace(/\s\d{1,5}:\d\d\.\d\d /g, '')
@@ -21,10 +22,17 @@ export const configDispatch = async (
 
   if (config?.shell) {
     switch (config.shell) {
-      case 'default': break
-      case 'unix': shell = BASH_PATH || false; break
-      case 'bash': shell = BASH_PATH || false; break
-      default: log.error(`dispatch() does not understand the shell '${shell}'`); break
+      case 'default':
+        break
+      case 'unix':
+        shell = BASH_PATH || false
+        break
+      case 'bash':
+        shell = BASH_PATH || false
+        break
+      default:
+        log.error(`dispatch() does not understand the shell '${shell}'`)
+        break
     }
   }
 
@@ -39,8 +47,13 @@ export const configDispatch = async (
   }
 
   return new Promise((resolve) => {
-    const command = `"${cmd}" ${config?.args?.map(arg => `"${arg}"`).join(' ') || ''}`
-    console.log(command)
+    const command = `"${cmd}" ${config?.args?.map((arg) => `"${arg}"`).join(' ') || ''}`
+    let spinner = new Spinner(
+      `Running command : "${cmd} ${config?.args?.map((arg) => `${arg}`).join(' ') || ''}".. %s`
+    )
+    spinner.setSpinnerString('⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏')
+    spinner.start()
+
     const proc = exec(command, {
       cwd: config?.cwd || process.cwd(),
       shell: shell ? String(shell) : undefined,
@@ -50,13 +63,28 @@ export const configDispatch = async (
       },
     })
 
-    proc.stdout?.on('data', (d) => handle(d))
-    proc.stderr?.on('data', (d) => handle(d))
+    proc.stdout?.on('data', (d) => {
+      spinner.stop(true)
+      handle(d)
+      spinner.start()
+    })
+    proc.stderr?.on('data', (d) => {
+      spinner.stop(true)
+      handle(d)
+      spinner.start()
+    })
 
     proc.stdout?.on('error', (d) => handle(d, config?.killOnError || false))
     proc.stderr?.on('error', (d) => handle(d, config?.killOnError || false))
 
     proc.on('exit', () => {
+      spinner.stop(true)
+      process.stdout.moveCursor(0, -1)
+      process.stdout.clearLine(0)
+      process.stdout.moveCursor(0, -1)
+      log.success(
+        `Successfully ran ${cmd} ${config?.args?.map((arg) => `${arg}`).join(' ') || ''}`
+      )
       resolve(true)
     })
   })

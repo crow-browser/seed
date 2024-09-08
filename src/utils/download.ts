@@ -59,6 +59,10 @@ export async function downloadFileToLocation(
       data.on('end', () => {
         clearInterval(progressInterval)
         progressBar.stop()
+        process.stdout.moveCursor(0, -1)
+        process.stdout.clearLine(0)
+        process.stdout.moveCursor(0, -1)
+        log.success('Successfully downloaded current version of firefox.')
         resolve()
       })
     })()

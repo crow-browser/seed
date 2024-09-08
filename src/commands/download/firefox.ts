@@ -22,6 +22,7 @@ import {
   unpackAddon,
 } from './addon'
 import { configPath } from '../../utils'
+import { Spinner } from 'cli-spinner'
 
 const execAsync = promisify(exec)
 
@@ -123,7 +124,9 @@ export async function setupFirefoxSource(version: string) {
 }
 
 async function unpackFirefoxSource(name: string): Promise<void> {
-  log.info(`Unpacking Firefox...`)
+  let spinner = new Spinner(`Unpacking Firefox.. %s`)
+  spinner.setSpinnerString('⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏')
+  spinner.start()
 
   ensureDirectory(ENGINE_DIR)
 
@@ -139,6 +142,7 @@ async function unpackFirefoxSource(name: string): Promise<void> {
     // GNU Tar doesn't come preinstalled on any MacOS machines, so we need to
     // check for it and ask for the user to install it if necessary
     if (!commandExistsSync('gtar')) {
+      spinner.stop(true)
       throw new Error(
         `GNU Tar is required to extract Firefox's source on MacOS. Please install it using the command |brew install gnu-tar| and try again`
       )
@@ -147,12 +151,22 @@ async function unpackFirefoxSource(name: string): Promise<void> {
     tarExec = 'gtar'
   }
 
-  execSync(
-    `${tarExec} --strip-components=1 -xf ${resolve(
-      MELON_TMP_DIR,
-      name
-    )} -C ${ENGINE_DIR}`
-  )
+  try {
+    execSync(
+      `${tarExec} --strip-components=1 -xf ${resolve(
+        MELON_TMP_DIR,
+        name
+      )} -C ${ENGINE_DIR}`
+    )
+    spinner.stop(true)
+    process.stdout.moveCursor(0, -1)
+    log.success('Successfully unpacked firefox source.')
+  } catch (error) {
+    spinner.stop(true)
+    process.stdout.moveCursor(0, -1)
+    log.error('Failed to unpack firefox source.')
+    throw error
+  }
 }
 
 async function downloadFirefoxSource(version: string) {

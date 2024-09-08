@@ -124,7 +124,7 @@ const genericBuild = async (os: string, fast = false) => {
     `Mach contents: \n ${readFileSync(join(ENGINE_DIR, 'mach'))}\n\n===END===`
   )
 
-  await configDispatch('./mach', {
+  await configDispatch('mach', {
     args: buildOptions,
     cwd: ENGINE_DIR,
     killOnError: true,
